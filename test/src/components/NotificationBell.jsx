@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { IconHolder } from "./icons";
 import { 
+  IconHolder,
   NotificationDropdown,
   NotificationTabs,
   NotificationItem,
@@ -12,7 +12,7 @@ import {
   getUnreadCountByCategory,
   markAsRead,
   markAllAsRead
-} from "./notifications";
+} from "../config";
 
 function NotificationBell() {
   const [isOpen, setIsOpen] = useState(false);

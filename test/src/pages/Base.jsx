@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SidebarContainer from "../components/layout/SidebarContainer";
-import HeaderContainer from "../components/layout/HeaderContainer";
+import SidebarContainer from "../components/SidebarContainer";
+import HeaderContainer from "../components/HeaderContainer";
 
 function Base() {
   const [currentMenu, setCurrentMenu] = useState(null);

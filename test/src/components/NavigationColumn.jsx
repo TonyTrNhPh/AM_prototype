@@ -1,7 +1,5 @@
 import { useState } from "react";
-import MenuItemLv1 from "./navigation/MenuItemLv1";
-import MenuItemLv2 from "./navigation/MenuItemLv2";
-import MenuItemLv3 from "./navigation/MenuItemLv3";
+import { MenuItemLv1, MenuItemLv2, MenuItemLv3 } from "../config";
 import { menuData } from "../data/menuData";
 
 function NavigationColumn({ onMenuChange }) {

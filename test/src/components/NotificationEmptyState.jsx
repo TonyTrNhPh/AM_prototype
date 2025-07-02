@@ -1,4 +1,4 @@
-import { IconHolder } from "../icons";
+import { IconHolder } from "../config";
 
 function NotificationEmptyState({ category, showUnreadOnly }) {
   const getEmptyMessage = () => {
@@ -41,8 +41,8 @@ function NotificationEmptyState({ category, showUnreadOnly }) {
   const { title, message } = getEmptyMessage();
 
   return (
-    <div className="flex flex-col items-center justify-center py-12 px-6">
-      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+    <div className="flex flex-col items-center justify-center px-6 py-12">
+      <div className="flex items-center justify-center w-16 h-16 mb-4 bg-gray-100 rounded-full">
         <IconHolder 
           name="bell" 
           size={24} 
@@ -50,11 +50,11 @@ function NotificationEmptyState({ category, showUnreadOnly }) {
         />
       </div>
       
-      <h4 className="text-sm font-medium text-gray-900 text-center mb-2">
+      <h4 className="mb-2 text-sm font-medium text-center text-gray-900">
         {title}
       </h4>
       
-      <p className="text-sm text-gray-500 text-center max-w-xs">
+      <p className="max-w-xs text-sm text-center text-gray-500">
         {message}
       </p>
     </div>

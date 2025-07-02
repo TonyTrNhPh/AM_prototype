@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import IconHolder from '../icons/IconHolder';
+import { IconHolder } from '../config';
 
 function MenuItemLv2({ title, iconName, children, isActive = false, onClick }) {
   const [isExpanded, setIsExpanded] = useState(false);

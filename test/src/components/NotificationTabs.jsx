@@ -1,5 +1,3 @@
-import { IconHolder } from "../icons";
-
 function NotificationTabs({ 
   categories, 
   activeCategory, 

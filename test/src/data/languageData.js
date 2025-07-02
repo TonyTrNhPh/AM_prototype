@@ -5,7 +5,7 @@ import JP from 'country-flag-icons/react/3x2/JP';
 import KR from 'country-flag-icons/react/3x2/KR';
 
 // Language Registry
-export const languagesRegistry = {
+export const languageData = {
   VI: {
     code: 'VI',
     name: 'Tiếng Việt',
@@ -62,19 +62,19 @@ export const languagesRegistry = {
 export const availableLanguages = ['VI', 'EN', 'ZH', 'JA', 'KO'];
 
 // Extended languages (all supported languages)
-export const allLanguages = Object.keys(languagesRegistry);
+export const allLanguages = Object.keys(languageData);
 
 // Helper functions
 export const getLanguageByCode = (code) => {
-  return languagesRegistry[code] || languagesRegistry.VI;
+  return languageData[code] || languageData.VI;
 };
 
 export const getAvailableLanguages = () => {
-  return availableLanguages.map(code => languagesRegistry[code]);
+  return availableLanguages.map(code => languageData[code]);
 };
 
 export const getAllLanguages = () => {
-  return allLanguages.map(code => languagesRegistry[code]);
+  return allLanguages.map(code => languageData[code]);
 };
 
 export const isLanguageAvailable = (code) => {
@@ -82,11 +82,11 @@ export const isLanguageAvailable = (code) => {
 };
 
 export const getDefaultLanguage = () => {
-  return languagesRegistry.VI;
+  return languageData.VI;
 };
 
 export const validateLanguageCode = (code) => {
-  return Object.keys(languagesRegistry).includes(code);
+  return Object.keys(languageData).includes(code);
 };
 
-export default languagesRegistry;
+export default languageData;

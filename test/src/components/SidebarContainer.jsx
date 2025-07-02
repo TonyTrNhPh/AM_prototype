@@ -1,6 +1,4 @@
-import LogoFrame from "../LogoFrame";
-import NavigationColumn from "../NavigationColumn";
-import SearchBar from "../SearchBar";
+import { LogoFrame, NavigationColumn, SearchBar } from "../config";
 
 function SidebarContainer({ onMenuChange }) {
   return (

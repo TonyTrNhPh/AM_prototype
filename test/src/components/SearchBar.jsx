@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconHolder } from "./icons";
+import { IconHolder } from "../config";
 
 function SearchBar({
   placeholder = "Tìm kiếm menu...",

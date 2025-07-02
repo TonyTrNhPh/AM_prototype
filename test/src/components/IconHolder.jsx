@@ -1,4 +1,4 @@
-import iconRegistry from './IconRegistry';
+import iconRegistry from '../data/iconData';
 
 function IconHolder({ 
   name, 
@@ -39,7 +39,7 @@ function IconHolder({
     return (
       <button
         onClick={onClick}
-        className="inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+        className="inline-flex items-center justify-center rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         type="button"
       >
         {iconElement}
