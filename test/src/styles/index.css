@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --amnote-red: #B71D21;
+  --amnote-brown: #FFE4E4;
+  --amnote-blue: #667280;
+  --amnote-gray: #D8D8E4;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Hide scrollbar by default */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+/* Hide scrollbar completely */
+.scrollbar-hover {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.scrollbar-hover::-webkit-scrollbar {
+  display: none; /* Webkit */
+}
