@@ -34,7 +34,7 @@ function MenuItemLv2({ title, iconName, children, isActive = false, onClick, cla
                   size={20} 
                   className="mr-3 text-gray-500 transition-colors duration-200" 
                 />
-                <span>{title}</span>
+                <span className='font-bold'>{title}</span>
               </div>
               <IconHolder 
                 name="chevron-right" 
