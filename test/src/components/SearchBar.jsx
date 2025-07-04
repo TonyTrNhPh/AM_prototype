@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { IconHolder } from "../config";
+import { Input } from "./ui/input";
+import { cn } from "../lib/utils";
 
 function SearchBar({
   placeholder = "Tìm kiếm menu...",
@@ -35,28 +37,28 @@ function SearchBar({
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      <div
-        className={`shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.1)] relative flex items-center w-full px-3 py-2 border rounded-lg transition-colors duration-200 ${
-          isFocused ? "border-[#B71D21]" : "border-gray-100"
-        }`}
-      >
-        <IconHolder
-          name="search"
-          size={18}
-          className={`mr-3 transition-colors duration-200 ${
-            isFocused ? "text-[#B71D21]" : "text-gray-400"
-          }`}
-        />
-        <input
+      <div className="relative">
+        <div className="absolute z-10 transform -translate-y-1/2 left-3 top-1/2">
+          <IconHolder
+            name="search"
+            size={18}
+            className={cn(
+              "transition-colors duration-200",
+              isFocused ? "text-[#B71D21]" : "text-gray-400"
+            )}
+          />
+        </div>
+        <Input
           type="text"
           placeholder={placeholder}
           value={searchValue}
           onChange={handleInputChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className={`flex-1 outline-none bg-transparent transition-colors duration-200 ${
-            searchValue.length > 0 ? "text-black" : "text-gray-500"
-          } placeholder-gray-400`}
+          className={cn(
+            "pl-10 pr-3 py-2 w-full shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.1)] transition-colors duration-200",
+            isFocused ? "border-[#B71D21] ring-[#B71D21] ring-1" : "border-gray-100"
+          )}
         />
       </div>
     </form>

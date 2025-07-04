@@ -1,9 +1,8 @@
 function LogoFrame() {
   return (
-    <div className="flex flex-row items-center justify-center
-            w-full h-24 bg-white">
+    <div className="flex flex-row items-center justify-center w-full h-24 bg-white">
       <img src="/src/assets/AMnote_logo.svg" alt="AMnote Logo"
-        className="h-32 w-full object-contain"/>
+        className="object-contain w-full h-30"/>
     </div>
   );
 }
