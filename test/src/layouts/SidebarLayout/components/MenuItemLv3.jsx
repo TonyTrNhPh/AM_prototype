@@ -1,5 +1,5 @@
-import { Button } from "./ui/button";
-import { cn } from "../lib/utils";
+import { Button } from "../../../components/ui/button";
+import { cn } from "../../../lib/utils";
 
 function MenuItemLv3({ title, onClick, isActive = false, className, ...props }) {
   return (

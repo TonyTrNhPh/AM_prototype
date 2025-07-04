@@ -1,5 +1,5 @@
-import { LogoFrame, NavigationColumn, SearchBar } from "../config";
-import { Sidebar } from "./ui/sidebar";
+import { LogoFrame, NavigationColumn, SearchBar } from "../../config";
+import { Sidebar } from "../../components/ui/sidebar";
 
 function SidebarContainer({ onMenuChange }) {
   return (

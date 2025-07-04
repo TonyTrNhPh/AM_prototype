@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { MenuItemLv1, MenuItemLv2, MenuItemLv3 } from "../config";
-import { menuData } from "../data/menuData";
+import { MenuItemLv1, MenuItemLv2, MenuItemLv3 } from "../../../config";
+import { menuData } from "../../../data/menuData";
 
 function NavigationColumn({ onMenuChange }) {
   const [activeItem, setActiveItem] = useState(null);

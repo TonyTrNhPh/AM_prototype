@@ -12,7 +12,7 @@ import {
   getUnreadCountByCategory,
   markAsRead,
   markAllAsRead
-} from "../config";
+} from "../../../config";
 
 function NotificationBell() {
   const [isOpen, setIsOpen] = useState(false);

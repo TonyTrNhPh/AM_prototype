@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import SidebarContainer from "../components/SidebarContainer";
-import HeaderContainer from "../components/HeaderContainer";
-import UnKnownPage from "../content/UnknownPage";
+import SidebarContainer from "./layouts/SidebarLayout/SidebarContainer";
+import HeaderContainer from "./layouts/HeaderLayout/HeaderContainer";
+import UnKnownPage from "./pages/unknown/UnknownPage";
 
-function Base() {
+function App() {
   const [currentMenu, setCurrentMenu] = useState(null);
 
   return (
@@ -19,4 +19,4 @@ function Base() {
   )
 }
 
-export default Base;
+export default App;

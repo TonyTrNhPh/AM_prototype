@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { IconHolder } from "../config";
-import { Input } from "./ui/input";
-import { cn } from "../lib/utils";
+import { IconHolder } from "../../config";
+import { Input } from "./input";
+import { cn } from "../../lib/utils";
 
 function SearchBar({
   placeholder = "Tìm kiếm menu...",

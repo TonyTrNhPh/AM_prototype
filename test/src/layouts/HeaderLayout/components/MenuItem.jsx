@@ -1,4 +1,4 @@
-import { IconHolder } from "../config";
+import { IconHolder } from "../../../config";
 
 function MenuItem({ item, onClick }) {
   const getItemStyles = (type) => {

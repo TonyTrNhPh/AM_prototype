@@ -1,5 +1,5 @@
 import { Icon } from "lucide-react";
-import { IconHolder } from "../config";
+import { IconHolder } from "../../../config";
 
 function NotificationDropdown({ 
   children, 

@@ -1,4 +1,4 @@
-import iconRegistry from '../data/iconData';
+import iconRegistry from '../../data/iconData';
 
 function IconHolder({ 
   name, 

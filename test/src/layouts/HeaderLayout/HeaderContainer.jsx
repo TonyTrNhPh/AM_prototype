@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { IconHolder } from "../config";
-import UserProfileDropdown from "./UserProfileDropdown";
-import LanguageSelector from "./LanguageSelector";
-import NotificationBell from "./NotificationBell";
+import { IconHolder } from "../../config";
+import UserProfileDropdown from "./components/UserProfileDropdown";
+import LanguageSelector from "./components/LanguageSelector";
+import NotificationBell from "./components/NotificationBell";
 
 function HeaderContainer({ currentMenu = null }) {
   const [isAnimating, setIsAnimating] = useState(false);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { IconHolder, MenuItem, getMenuItemsByRole} from "../config";
+import { IconHolder, MenuItem, getMenuItemsByRole} from "../../../config";
 
 function UserProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);

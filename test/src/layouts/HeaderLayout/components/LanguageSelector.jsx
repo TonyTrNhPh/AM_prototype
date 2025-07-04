@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconHolder, LanguageFlag, LanguageOption, getAvailableLanguages, getDefaultLanguage } from "../config";
+import { IconHolder, LanguageFlag, LanguageOption, getAvailableLanguages, getDefaultLanguage } from "../../../config";
 
 function LanguageSelector() {
   const [isOpen, setIsOpen] = useState(false);
