@@ -33,6 +33,37 @@ export default {
           }
         }
       },
+      // Custom animations for the horizontal loader
+      animation: {
+        'slide-gradient': 'slideGradient 2s linear infinite',
+      },
+      // Custom keyframes for the gradient sliding animation
+      keyframes: {
+        slideGradient: {
+          '0%': { 
+            transform: 'translateX(-100%)',
+            opacity: '0'
+          },
+          '10%': {
+            opacity: '1'
+          },
+          '90%': {
+            opacity: '1'
+          },
+          '100%': { 
+            transform: 'translateX(100%)',
+            opacity: '0'
+          },
+        },
+      },
+      // Custom drop shadow for glow effect
+      dropShadow: {
+        'glow': [
+          '0 0 2px rgba(239, 68, 68, 0.5)',
+          '0 0 8px rgba(239, 68, 68, 0.3)',
+          '0 0 16px rgba(239, 68, 68, 0.1)'
+        ],
+      },
     },
   },
   plugins: [],

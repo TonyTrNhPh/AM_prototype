@@ -61,6 +61,7 @@ import {
   ChartColumn,
   Database,
   LayoutDashboard,
+  Loader2,
   
   // Notification types
   Info,
@@ -136,6 +137,7 @@ const iconRegistry = {
   'chart-no-axes-combined': ChartNoAxesCombined,
   'chart-column': ChartColumn,
   'database': Database,
+  'loader': Loader2,
   
   // Notification Types
   'info': Info,

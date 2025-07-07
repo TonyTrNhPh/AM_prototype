@@ -1,5 +1,5 @@
-import UnKnownPage from "./components/UnknownPage";
+import UnknownPage from "./components/UnknownPage";
 
-export default function UnknownPage(){
-    return <UnKnownPage />;
+export default function Unknown(){
+    return <UnknownPage />;
 }

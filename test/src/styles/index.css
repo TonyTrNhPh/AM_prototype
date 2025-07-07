@@ -154,3 +154,33 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom loader animations */
+@keyframes slideGradient {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Ensure the animation class is available */
+.animate-slide-gradient {
+  animation: slideGradient 2s linear infinite;
+}
+
+/* Glow effect for the loader */
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.5)) 
+          drop-shadow(0 0 8px rgba(239, 68, 68, 0.3)) 
+          drop-shadow(0 0 16px rgba(239, 68, 68, 0.1));
+}
