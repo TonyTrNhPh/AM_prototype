@@ -1,10 +1,18 @@
 import { useState } from "react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../../components/ui/popover";
+import { Button } from "../../../components/ui/button";
+import { Badge } from "../../../components/ui/badge";
+import { Switch } from "../../../components/ui/switch";
+import { Separator } from "../../../components/ui/separator";
+import { ScrollArea } from "../../../components/ui/scroll-area";
 import { 
   IconHolder,
-  NotificationDropdown,
   NotificationTabs,
   NotificationItem,
-  NotificationEmptyState,
   notificationCategories,
   sampleNotifications,
   getNotificationsByCategory,
@@ -61,66 +69,171 @@ function NotificationBell() {
   const totalUnreadCount = getUnreadCount(notifications);
   const filteredNotifications = getFilteredNotifications();
 
+  // Inline NotificationEmptyState component
+  const NotificationEmptyState = ({ category, showUnreadOnly }) => {
+    const getEmptyMessage = () => {
+      if (showUnreadOnly) {
+        return {
+          title: "Không có thông báo chưa đọc",
+          message: "Tất cả thông báo đã được đọc"
+        };
+      }
+
+      switch (category) {
+        case 'posts':
+          return {
+            title: "Không có tin đăng mới",
+            message: "Bạn sẽ nhận được thông báo khi có tin đăng mới"
+          };
+        case 'finance':
+          return {
+            title: "Không có thông báo tài chính",
+            message: "Bạn sẽ nhận được thông báo về thanh toán và hóa đơn"
+          };
+        case 'promotions':
+          return {
+            title: "Không có khuyến mãi mới",
+            message: "Bạn sẽ nhận được thông báo về các chương trình khuyến mãi"
+          };
+        case 'more':
+          return {
+            title: "Không có thông báo khác",
+            message: "Bạn sẽ nhận được các thông báo hệ thống và cập nhật"
+          };
+        default:
+          return {
+            title: "Hiện tại bạn không có thông báo nào",
+            message: "Bạn sẽ nhận được thông báo khi có hoạt động mới"
+          };
+      }
+    };
+
+    const { title, message } = getEmptyMessage();
+
+    return (
+      <div className="flex flex-col items-center justify-center px-6 py-12">
+        <div className="flex items-center justify-center w-16 h-16 mb-4 bg-gray-100 rounded-full">
+          <IconHolder 
+            name="bell" 
+            size={24} 
+            className="text-gray-400"
+          />
+        </div>
+        
+        <h4 className="mb-2 text-sm font-medium text-center text-gray-900">
+          {title}
+        </h4>
+        
+        <p className="max-w-xs text-sm text-center text-gray-500">
+          {message}
+        </p>
+      </div>
+    );
+  };
+
   return (
-    <div className="relative">
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 text-gray-500 transition-colors duration-200 rounded-lg hover:text-gray-700 hover:bg-gray-100"
-      >
-        <IconHolder 
-          name="bell" 
-          size={20} 
-          className="text-current" 
-        />
-        {totalUnreadCount > 0 && (
-          <span className="absolute w-2 h-2 bg-red-500 rounded-full top-1 right-1"></span>
-        )}
-      </button>
-
-      {isOpen && (
-        <>
-          <div 
-            className="fixed inset-0 z-10" 
-            onClick={() => setIsOpen(false)}
-          ></div>
-          
-          <div className="absolute right-0 z-20 mt-2 top-14">
-            <NotificationDropdown
-              showUnreadOnly={showUnreadOnly}
-              onToggleUnreadOnly={setShowUnreadOnly}
-              onMarkAllRead={handleMarkAllRead}
-              onSettings={handleSettings}
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
+      <PopoverTrigger asChild>
+        <Button 
+          variant="ghost" 
+          size="icon"
+          className="relative w-10 h-10"
+        >
+          <IconHolder 
+            name="bell" 
+            size={20} 
+            className="text-gray-500" 
+          />
+          {totalUnreadCount > 0 && (
+            <Badge 
+              variant="destructive" 
+              className="absolute flex items-center justify-center w-4 h-4 p-0 text-xs -top-1 -right-1"
             >
-              {/* Tabs */}
-              <NotificationTabs
-                categories={notificationCategories}
-                activeCategory={activeCategory}
-                onCategoryChange={setActiveCategory}
-                getUnreadCount={getUnreadCountForCategory}
-              />
+              {totalUnreadCount > 9 ? '9+' : totalUnreadCount}
+            </Badge>
+          )}
+        </Button>
+      </PopoverTrigger>
 
-              {/* Notification List */}
-              <div className="p-2 overflow-y-auto max-h-96 scrollbar-hide">
-                {filteredNotifications.length > 0 ? (
-                  filteredNotifications.map((notification) => (
-                    <NotificationItem
-                      key={notification.id}
-                      notification={notification}
-                      onClick={handleNotificationClick}
-                    />
-                  ))
-                ) : (
-                  <NotificationEmptyState 
-                    category={activeCategory}
-                    showUnreadOnly={showUnreadOnly}
-                  />
-                )}
-              </div>
-            </NotificationDropdown>
+      <PopoverContent className="p-0 w-96" align="end">
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-2">
+            <IconHolder 
+              name="bell"
+              size={20}
+              className="text-gray-900"
+            />
+            <h3 className="text-sm font-semibold text-gray-900">Thông báo</h3>
           </div>
-        </>
-      )}
-    </div>
+          
+          <div className="flex items-center space-x-2">
+            {/* Unread toggle */}
+            <div className="flex items-center space-x-2">
+              <Switch
+                checked={showUnreadOnly}
+                onCheckedChange={setShowUnreadOnly}
+                className="data-[state=checked]:bg-[#B71D21]"
+              />
+              <span className="text-sm text-gray-600">Chưa đọc</span>
+            </div>
+
+            {/* Action buttons */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleMarkAllRead}
+              className="w-8 h-8"
+              title="Đánh dấu tất cả đã đọc"
+            >
+              <IconHolder name="check" size={16} />
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleSettings}
+              className="w-8 h-8"
+              title="Cài đặt thông báo"
+            >
+              <IconHolder name="settings" size={16} />
+            </Button>
+          </div>
+        </div>
+
+        <Separator />
+
+        {/* Tabs */}
+        <NotificationTabs
+          categories={notificationCategories}
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+          getUnreadCount={getUnreadCountForCategory}
+        />
+
+        <Separator />
+
+        {/* Notification List */}
+        <ScrollArea className="h-96">
+          <div className="p-2">
+            {filteredNotifications.length > 0 ? (
+              filteredNotifications.map((notification) => (
+                <NotificationItem
+                  key={notification.id}
+                  notification={notification}
+                  onClick={handleNotificationClick}
+                />
+              ))
+            ) : (
+              <NotificationEmptyState 
+                category={activeCategory}
+                showUnreadOnly={showUnreadOnly}
+              />
+            )}
+          </div>
+        </ScrollArea>
+      </PopoverContent>
+    </Popover>
   );
 }
 

@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import { IconHolder } from "../../config";
-import UserProfileDropdown from "./components/UserProfileDropdown";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "../../components/ui/breadcrumb";
+import { Badge } from "../../components/ui/badge";
+import UserProfileDropdown from "./components/UserProfileMenu";
 import LanguageSelector from "./components/LanguageSelector";
 import NotificationBell from "./components/NotificationBell";
 
@@ -41,52 +50,90 @@ function HeaderContainer({ currentMenu = null }) {
     return "layout-dashboard";
   };
 
-  // Function to render breadcrumb title based on current menu
-  const renderMenuTitle = () => {
+  // Function to render breadcrumb navigation based on current menu
+  const renderBreadcrumb = () => {
     if (!displayMenu) {
       return (
-        <h1 className="text-sm font-bold text-gray-800">
-          Bảng điều khiển
-        </h1>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbPage className="text-sm font-bold text-gray-800">
+                Bảng điều khiển
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       );
     }
 
-    // If menu has no parent (MenuLv2) or no children, show as bold black
+    // If menu has no parent (MenuLv2) or no children, show as single item
     if (!displayMenu.parent && (!displayMenu.children || displayMenu.children.length === 0)) {
       return (
-        <h1 className="text-sm font-bold text-gray-800">
-          {displayMenu.label}
-        </h1>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbPage className="text-sm font-bold text-gray-800">
+                {displayMenu.label}
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       );
     }
 
-    // If menu has parent (MenuLv3), show breadcrumb: Parent / Current
+    // If menu has parent (MenuLv3), show breadcrumb: Parent > Current
     if (displayMenu.parent) {
       return (
-        <h1 className="text-sm">
-          <span className="font-bold text-gray-800">{displayMenu.parent.label}</span>
-          <span className="mx-2 text-gray-500">/</span>
-          <span className="text-gray-500">{displayMenu.label}</span>
-        </h1>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink className="text-sm font-bold text-gray-500 hover:text-gray-700">
+                {displayMenu.parent.label}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="flex items-center space-x-2">
+                <span className="text-sm font-bold text-gray-800">{displayMenu.label}</span>
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       );
     }
 
     // If menu has children but one is selected (MenuLv2 with active child)
     if (displayMenu.children && displayMenu.activeChild) {
       return (
-        <h1 className="text-sm">
-          <span className="font-bold text-gray-800">{displayMenu.label}</span>
-          <span className="mx-2 text-gray-500">/</span>
-          <span className="text-gray-500">{displayMenu.activeChild.label}</span>
-        </h1>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink className="text-sm text-gray-500 hover:text-gray-700">
+                {displayMenu.label}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="text-sm font-bold text-gray-800">
+                {displayMenu.activeChild.label}
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       );
     }
 
-    // Default: show as bold black
+    // Default: show as single item
     return (
-      <h1 className="text-sm font-bold text-gray-800">
-        {displayMenu.label}
-      </h1>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbPage className="text-sm font-bold text-gray-800">
+              {displayMenu.label}
+            </BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
     );
   };
 
@@ -107,12 +154,12 @@ function HeaderContainer({ currentMenu = null }) {
           <div className={`transition-all duration-300 ease-in-out ${
             isAnimating ? 'opacity-0 translate-x-2' : 'opacity-100 translate-x-0'
           }`}>
-            {renderMenuTitle()}
+            {renderBreadcrumb()}
           </div>
         </div>
 
         {/* Right Section - Notifications, Language, User */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-6">
           <NotificationBell />
           <LanguageSelector />
           <UserProfileDropdown />
