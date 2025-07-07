@@ -13,7 +13,7 @@ import UserProfileDropdown from "./components/UserProfileMenu";
 import LanguageSelector from "./components/LanguageSelector";
 import NotificationBell from "./components/NotificationBell";
 
-function HeaderContainer({ currentMenu = null }) {
+function HeaderLayout({ currentMenu = null }) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [displayMenu, setDisplayMenu] = useState(currentMenu);
 
@@ -169,4 +169,4 @@ function HeaderContainer({ currentMenu = null }) {
   );
 }
 
-export default HeaderContainer;
+export default HeaderLayout;

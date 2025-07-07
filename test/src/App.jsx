@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SidebarContainer from "./layouts/SidebarLayout/SidebarContainer";
-import HeaderContainer from "./layouts/HeaderLayout/HeaderContainer";
+import SidebarContainer from "./layouts/SidebarLayout/SidebarLayout";
+import HeaderContainer from "./layouts/HeaderLayout/HeaderLayout";
 import UnKnownPage from "./pages/unknown/UnknownPage";
 
 function App() {

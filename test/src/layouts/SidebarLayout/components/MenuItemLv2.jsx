@@ -1,16 +1,54 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { IconHolder } from '../../../config';
 import { Button } from "../../../components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../../components/ui/collapsible";
 import { cn } from "../../../lib/utils";
 
-function MenuItemLv2({ title, iconName, children, isActive = false, onClick, className, ...props }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+function MenuItemLv2({ 
+  title, 
+  iconName, 
+  children, 
+  isActive = false, 
+  onClick, 
+  forceExpanded = undefined,
+  isManuallyExpanded = false,
+  onManualExpansion,
+  className, 
+  ...props 
+}) {
+  const [isExpanded, setIsExpanded] = useState(isManuallyExpanded);
   const hasChildren = children && (Array.isArray(children) ? children.length > 0 : true);
+  const wasForceExpanded = useRef(false);
+
+  // Initialize from manual expansion state
+  useEffect(() => {
+    setIsExpanded(isManuallyExpanded);
+  }, [isManuallyExpanded]);
+
+  // Update expansion state when forceExpanded changes
+  useEffect(() => {
+    if (forceExpanded === true && !wasForceExpanded.current) {
+      // Auto-expand due to search
+      setIsExpanded(true);
+      wasForceExpanded.current = true;
+    } else if (forceExpanded === false && wasForceExpanded.current && !isManuallyExpanded) {
+      // Auto-collapse when search is cleared, but only if not manually expanded
+      setIsExpanded(false);
+      wasForceExpanded.current = false;
+    } else if (forceExpanded === undefined) {
+      // No search active, reset force expansion tracking but preserve manual state
+      wasForceExpanded.current = false;
+    }
+  }, [forceExpanded, isManuallyExpanded]);
 
   const handleClick = () => {
     if (hasChildren) {
-      setIsExpanded(!isExpanded);
+      const newExpandedState = !isExpanded;
+      setIsExpanded(newExpandedState);
+      // Notify parent about manual expansion/collapse
+      if (onManualExpansion) {
+        onManualExpansion(newExpandedState);
+      }
     } else if (onClick) {
       onClick();
     }
