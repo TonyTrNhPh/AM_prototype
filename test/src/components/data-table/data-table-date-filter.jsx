@@ -1,16 +1,16 @@
-"use client";;
+"use client";
 import { CalendarIcon, XCircle } from "lucide-react";
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { Button } from "../ui/button";
+import { Calendar } from "../ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
-import { formatDate } from "@/lib/format";
+} from "../ui/popover";
+import { Separator } from "../ui/separator";
+import { formatDate } from "../../lib/format";
 
 function getIsDateRange(value) {
   return value && typeof value === "object" && !Array.isArray(value);

@@ -1,7 +1,6 @@
 import { IconHolder } from "@/config";
-import React from "react";
 
-function UnknownPage() {
+function Content() {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full px-6 py-3 bg-white border-b border-gray-200 rounded-2xl shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.1)]">
       <div className="flex items-center justify-center w-16 h-16 mb-4 bg-gray-100 rounded-full">
@@ -22,4 +21,4 @@ function UnknownPage() {
   );
 }
 
-export default UnknownPage;
+export default Content;

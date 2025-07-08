@@ -1,6 +1,6 @@
 import { flexRender } from "@tanstack/react-table";
 
-import { DataTablePagination } from "@/components/data-table/data-table-pagination";
+import { DataTablePagination } from "./data-table-pagination";
 import {
   Table,
   TableBody,
@@ -8,9 +8,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { getCommonPinningStyles } from "@/lib/data-table";
-import { cn } from "@/lib/utils";
+} from "../ui/table";
+import { getCommonPinningStyles } from "../../lib/data-table";
+import { cn } from "../../lib/utils";
 
 export function DataTable(
   {
@@ -23,10 +23,10 @@ export function DataTable(
 ) {
   return (
     <div
-      className={cn("flex w-full flex-col gap-2.5 overflow-auto", className)}
+      className={cn("flex w-full flex-col gap-4 overflow-auto", className)}
       {...props}>
       {children}
-      <div className="overflow-hidden rounded-md border">
+      <div className="overflow-hidden border rounded-md">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

@@ -1,6 +1,6 @@
-"use client";;
-import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
-import { cn } from "@/lib/utils";
+"use client";
+import { DataTableViewOptions } from "./data-table-view-options";
+import { cn } from "../../lib/utils";
 
 export function DataTableAdvancedToolbar(
   {

@@ -1,4 +1,4 @@
-import { dataTableConfig } from "@/config/data-table";
+import { dataTableConfig } from "../config/data-table";
 
 export function getCommonPinningStyles(
   {

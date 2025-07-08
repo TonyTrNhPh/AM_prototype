@@ -1,5 +1,5 @@
-import CompanyManagementPage from "./components/CompanyManagementPage";
+import Content from "./components/content";
 
 export default function CompanyManagement() {
-    return <CompanyManagementPage />;
+    return <Content />;
 }
