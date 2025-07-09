@@ -1,5 +1,5 @@
-import { ScrollArea, ScrollBar } from "../../../components/ui/scroll-area";
-import { Badge } from "../../../components/ui/badge";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
 
 function NotificationTabs({ 
   categories, 

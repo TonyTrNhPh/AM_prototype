@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useCallback } from "react";
-import { MenuItemLv1, MenuItemLv2, MenuItemLv3 } from "../../../config";
-import { menuData } from "../../../data/menuData";
+import { MenuItemLv1, MenuItemLv2, MenuItemLv3 } from "@/config";
+import { menuData } from "@/data/menuData";
 
 /**
  * NavigationColumn Component
@@ -321,7 +321,7 @@ function NavigationColumn({ onMenuChange, searchQuery = "" }) {
       {searchQuery.trim() && filteredMenuData.length === 0 ? (
         <div className="flex flex-col items-center justify-center w-full py-8 text-gray-500">
           <div className="text-sm font-medium">Không tìm thấy kết quả</div>
-          <div className="mt-1 text-xs text-center px-4">
+          <div className="px-4 mt-1 text-xs text-center">
             Thử tìm kiếm với từ khóa khác hoặc kiểm tra chính tả
           </div>
         </div>

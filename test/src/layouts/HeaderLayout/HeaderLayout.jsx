@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IconHolder } from "../../config";
+import { IconHolder } from "@/config";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -7,8 +7,8 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "../../components/ui/breadcrumb";
-import { Badge } from "../../components/ui/badge";
+} from "@/components/ui/breadcrumb";
+import { Badge } from "@/components/ui/badge";
 import UserProfileDropdown from "./components/UserProfileMenu";
 import LanguageSelector from "./components/LanguageSelector";
 import NotificationBell from "./components/NotificationBell";

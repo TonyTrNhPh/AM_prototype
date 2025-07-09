@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { IconHolder } from '../../../config';
-import { Button } from "../../../components/ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../../components/ui/collapsible";
-import { cn } from "../../../lib/utils";
+import { IconHolder } from '@/config';
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
 
 function MenuItemLv2({ 
   title, 

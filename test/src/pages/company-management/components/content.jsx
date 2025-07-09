@@ -8,16 +8,16 @@ import {
   Eye,
 } from "lucide-react";
 
-import TableLayout from "../../../layouts/TableLayout/TableLayout";
-import { Badge } from "../../../components/ui/badge";
-import { Button } from "../../../components/ui/button";
-import { Checkbox } from "../../../components/ui/checkbox";
+import TableLayout from "@/layouts/TableLayout/TableLayout";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../../../components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 
 function Content({ menuItem }) {
   const taskData = [
@@ -600,24 +600,21 @@ function Content({ menuItem }) {
   // Action bar items for bulk operations
   const actionBarItems = [
     {
-      label: "Export",
-      icon: Download,
+      icon: "download",
       onClick: (selectedRows) => {
         alert(`Exporting ${selectedRows.length} tasks`);
       },
       tooltip: "Export selected tasks",
     },
     {
-      label: "Import",
-      icon: Upload,
+      icon: "upload",
       onClick: () => {
         alert("Import tasks functionality");
       },
       tooltip: "Import tasks from file",
     },
     {
-      label: "Delete",
-      icon: Trash2,
+      icon: "trash-2",
       onClick: (selectedRows) => {
         if (confirm(`Delete ${selectedRows.length} selected tasks?`)) {
           alert(`${selectedRows.length} tasks deleted!`);

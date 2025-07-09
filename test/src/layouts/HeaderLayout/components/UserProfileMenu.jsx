@@ -3,10 +3,10 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../../../components/ui/popover";
-import { Button } from "../../../components/ui/button";
-import { Avatar, AvatarFallback } from "../../../components/ui/avatar";
-import { IconHolder, MenuItem, getMenuItemsByRole} from "../../../config";
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { IconHolder, MenuItem, getMenuItemsByRole} from "@/config";
 
 function UserProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);

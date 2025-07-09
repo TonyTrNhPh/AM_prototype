@@ -1,4 +1,4 @@
-import { cn } from "../../../lib/utils";
+import { cn } from "@/lib/utils";
 
 function MenuItemLv1({ title, children, className, ...props }) {
   return (

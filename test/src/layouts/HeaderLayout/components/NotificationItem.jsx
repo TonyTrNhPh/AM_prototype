@@ -1,4 +1,4 @@
-import { IconHolder, formatTimeAgo, getNotificationType } from "../../../config";
+import { IconHolder, formatTimeAgo, getNotificationType } from "@/config";
 
 function NotificationItem({ notification, onClick }) {
   const handleClick = () => {

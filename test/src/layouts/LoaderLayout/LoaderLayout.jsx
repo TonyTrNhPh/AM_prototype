@@ -1,7 +1,7 @@
 import React from "react";
-import HorizontalLineLoader from "../../components/ui/loader";
-import { Avatar, AvatarImage } from "../../components/ui/avatar";
-import AMnoteLogo from "../../assets/AMnote_logo.svg";
+import HorizontalLineLoader from "@/components/ui/loader";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import AMnoteLogo from "@/assets/AMnote_logo.svg";
 
 const LoaderLayout = ({ 
   isVisible = true, 

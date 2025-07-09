@@ -5,7 +5,7 @@ export * from './components';
 export * from './data';
 
 // Re-export Layout Components
-export * from '../layouts/HeaderLayout';
-export * from '../layouts/SidebarLayout';
+export * from '@/layouts/HeaderLayout';
+export * from '@/layouts/SidebarLayout';
 
 

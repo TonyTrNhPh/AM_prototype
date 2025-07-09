@@ -11,7 +11,7 @@ import {
 } from "@tanstack/react-table";
 
 // Data Table Components
-import { DataTable } from "../../components/data-table/data-table";
+import { DataTable } from "@/components/data-table/data-table";
 
 // Table Layout Components
 import TableTitle from "./components/TableTitle";

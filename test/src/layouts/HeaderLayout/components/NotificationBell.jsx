@@ -3,12 +3,12 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../../../components/ui/popover";
-import { Button } from "../../../components/ui/button";
-import { Badge } from "../../../components/ui/badge";
-import { Switch } from "../../../components/ui/switch";
-import { Separator } from "../../../components/ui/separator";
-import { ScrollArea } from "../../../components/ui/scroll-area";
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   IconHolder,
   NotificationTabs,
@@ -20,7 +20,7 @@ import {
   getUnreadCountByCategory,
   markAsRead,
   markAllAsRead
-} from "../../../config";
+} from "@/config";
 
 function NotificationBell() {
   const [isOpen, setIsOpen] = useState(false);

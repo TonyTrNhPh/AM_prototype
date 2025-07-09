@@ -1,5 +1,5 @@
 // Export Data/Registries
-export { default as iconRegistry } from '../data/iconData';
+export { default as iconRegistry } from '@/data/iconData';
 
 export { 
   default as languagesRegistry,
@@ -11,14 +11,14 @@ export {
   isLanguageAvailable,
   getDefaultLanguage,
   validateLanguageCode
-} from '../data/languageData';
+} from '@/data/languageData';
 
 export { 
   default as menuItemsRegistry,
   userProfileMenuItems,
   getMenuItemsByRole,
   getMenuItemById
-} from '../data/utilityData';
+} from '@/data/utilityData';
 
 export { 
   default as notificationCategories,
@@ -30,6 +30,6 @@ export {
   markAllAsRead,
   formatTimeAgo,
   getNotificationType
-} from '../data/notificationData';
+} from '@/data/notificationData';
 
-export { default as menuData } from '../data/menuData';
+export { default as menuData } from '@/data/menuData';

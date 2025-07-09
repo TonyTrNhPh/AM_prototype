@@ -1,16 +1,16 @@
 import React from "react";
 import { Trash } from "lucide-react";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../components/ui/select";
-import { DataTableFacetedFilter } from "../../../components/data-table/data-table-faceted-filter";
-import { DataTableDateFilter } from "../../../components/data-table/data-table-date-filter";
+} from "@/components/ui/select";
+import { DataTableFacetedFilter } from "@/components/data-table/data-table-faceted-filter";
+import { DataTableDateFilter } from "@/components/data-table/data-table-date-filter";
 
 function TableFilterEditor({ filter, index, columns, onUpdate, onRemove }) {
   const column = columns.find(c => c.id === filter.column);

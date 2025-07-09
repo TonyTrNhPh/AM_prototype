@@ -1,7 +1,7 @@
 import React from "react";
 import { Search } from "lucide-react";
-import { Input } from "../../../components/ui/input";
-import { DataTableViewOptions } from "../../../components/data-table/data-table-view-options";
+import { Input } from "@/components/ui/input";
+import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
 import TableAdvancedFilterSystem from "./TableAdvancedFilterSystem";
 
 function TableToolbar({ 

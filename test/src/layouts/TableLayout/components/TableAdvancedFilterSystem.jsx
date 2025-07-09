@@ -1,11 +1,11 @@
 import React from "react";
 import { Filter, X, Plus } from "lucide-react";
-import { Button } from "../../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../../../components/ui/popover";
+} from "@/components/ui/popover";
 import TableFilterEditor from "./TableFilterEditor";
 
 function TableAdvancedFilterSystem({ table, advancedFilters, setAdvancedFilters }) {

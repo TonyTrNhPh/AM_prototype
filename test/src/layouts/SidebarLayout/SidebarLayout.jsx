@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
-import { LogoFrame, NavigationColumn, SearchBar } from "../../config";
-import { Sidebar } from "../../components/ui/sidebar";
-import { ScrollArea } from "../../components/ui/scroll-area";
+import { LogoFrame, NavigationColumn, SearchBar } from "@/config";
+import { Sidebar } from "@/components/ui/sidebar";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 /**
  * SidebarLayout Component

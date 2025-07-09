@@ -1,5 +1,5 @@
-import UnknownPage from "../pages/unknown/page";
-import CompanyManagementPage from "../pages/company-management/page";
+import UnknownPage from "@/pages/unknown/page";
+import CompanyManagementPage from "@/pages/company-management/page";
 
 export const pageRoutes = {
   '11': UnknownPage, 
