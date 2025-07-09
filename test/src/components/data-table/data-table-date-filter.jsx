@@ -119,7 +119,7 @@ export function DataTableDateFilter(
         : "Select date range";
 
       return (
-        <span className="flex items-center gap-2">
+        <span className="flex items-center gap-2 ">
           <span>{title}</span>
           {hasSelectedDates && (
             <>
@@ -154,14 +154,14 @@ export function DataTableDateFilter(
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className="border-dashed">
+        <Button variant="outline" size="lg" className="border-dashed">
           {hasValue ? (
             <div
               role="button"
               aria-label={`Clear ${title} filter`}
               tabIndex={0}
               onClick={onReset}
-              className="rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+              className="w-full h-10 transition-opacity rounded-sm opacity-70 hover:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
               <XCircle />
             </div>
           ) : (

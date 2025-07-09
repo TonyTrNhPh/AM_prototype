@@ -640,8 +640,8 @@ function Content({ menuItem }) {
           enablePagination={true}
           actionBarItems={actionBarItems}
           className="space-y-4"
-          title={"Company Management"}
-          subtitle={"Manage your company tasks and projects"}
+          title={"Quản lý công ty"}
+          subtitle={"Quản lý thông tin các công ty trong hệ thống"}
           icon="building-2"
         />
       </div>

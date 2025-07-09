@@ -37,20 +37,15 @@ export function DataTableFacetedFilter(
   const onItemSelect = React.useCallback((option, isSelected) => {
     if (!column) return;
 
-    if (multiple) {
-      const newSelectedValues = new Set(selectedValues);
-      if (isSelected) {
-        newSelectedValues.delete(option.value);
-      } else {
-        newSelectedValues.add(option.value);
-      }
-      const filterValues = Array.from(newSelectedValues);
-      column.setFilterValue(filterValues.length ? filterValues : undefined);
+    const newSelectedValues = new Set(selectedValues);
+    if (isSelected) {
+      newSelectedValues.delete(option.value);
     } else {
-      column.setFilterValue(isSelected ? undefined : [option.value]);
-      setOpen(false);
+      newSelectedValues.add(option.value);
     }
-  }, [column, multiple, selectedValues]);
+    const filterValues = Array.from(newSelectedValues);
+    column.setFilterValue(filterValues.length ? filterValues : undefined);
+  }, [column, selectedValues]);
 
   const onReset = React.useCallback((event) => {
     event?.stopPropagation();
@@ -59,46 +54,33 @@ export function DataTableFacetedFilter(
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className="border-dashed">
+      <PopoverTrigger className="w-full h-9" asChild>
+        <Button variant="outline" size="sm" className="justify-start border-dashed h-9">
           {selectedValues?.size > 0 ? (
-            <div
-              role="button"
-              aria-label={`Clear ${title} filter`}
-              tabIndex={0}
-              onClick={onReset}
-              className="rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-              <XCircle />
-            </div>
-          ) : (
-            <PlusCircle />
-          )}
-          {title}
-          {selectedValues?.size > 0 && (
             <>
-              <Separator orientation="vertical" className="mx-0.5 data-[orientation=vertical]:h-4" />
-              <Badge variant="secondary" className="rounded-sm px-1 font-normal lg:hidden">
-                {selectedValues.size}
-              </Badge>
-              <div className="hidden items-center gap-1 lg:flex">
-                {selectedValues.size > 2 ? (
-                  <Badge variant="secondary" className="rounded-sm px-1 font-normal">
-                    {selectedValues.size} selected
-                  </Badge>
-                ) : (
-                  options
+              {selectedValues.size > 2 ? (
+                <span className="text-sm">
+                  {selectedValues.size} selected
+                </span>
+              ) : (
+                <div className="flex items-center gap-1">
+                  {options
                     .filter((option) => selectedValues.has(option.value))
                     .map((option) => (
                       <Badge
                         variant="secondary"
                         key={option.value}
-                        className="rounded-sm px-1 font-normal">
+                        className="px-1 text-xs font-normal rounded-sm">
                         {option.label}
                       </Badge>
-                    ))
-                )}
-              </div>
+                    ))}
+                </div>
+              )}
             </>
+          ) : (
+            <span className="text-sm text-muted-foreground">
+              {title || "Select options..."}
+            </span>
           )}
         </Button>
       </PopoverTrigger>

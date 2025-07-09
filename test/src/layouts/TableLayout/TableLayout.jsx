@@ -9,7 +9,7 @@ import {
   getFacetedUniqueValues,
   getFacetedMinMaxValues,
 } from "@tanstack/react-table";
-import { Search, Filter, X, Plus } from "lucide-react";
+import { Search, Filter, X, Plus, Trash } from "lucide-react";
 
 // Data Table Components
 import { DataTable } from "../../components/data-table/data-table";
@@ -169,10 +169,22 @@ function AdvancedFilterSystem({ table, advancedFilters, setAdvancedFilters }) {
   );
 
   const addFilter = () => {
+    const firstColumn = filterableColumns[0];
+    const columnMeta = firstColumn?.columnDef.meta;
+    
+    let defaultOperator = "contains";
+    if (columnMeta?.variant === "select" || columnMeta?.variant === "multiSelect") {
+      defaultOperator = "includes";
+    } else if (columnMeta?.variant === "date") {
+      defaultOperator = "equals";
+    } else if (columnMeta?.variant === "number") {
+      defaultOperator = "equals";
+    }
+    
     const newFilter = {
       id: Date.now(),
-      column: filterableColumns[0]?.id || "",
-      operator: "contains",
+      column: firstColumn?.id || "",
+      operator: defaultOperator,
       value: "",
       conjunction: advancedFilters.length > 0 ? "and" : "",
     };
@@ -184,9 +196,27 @@ function AdvancedFilterSystem({ table, advancedFilters, setAdvancedFilters }) {
   };
 
   const updateFilter = (filterId, updates) => {
-    setAdvancedFilters(advancedFilters.map(f => 
-      f.id === filterId ? { ...f, ...updates } : f
-    ));
+    setAdvancedFilters(advancedFilters.map(f => {
+      if (f.id === filterId) {
+        const updatedFilter = { ...f, ...updates };
+        // Auto-set operator based on column type when column changes
+        if (updates.column && updates.column !== f.column) {
+          const newColumn = filterableColumns.find(c => c.id === updates.column);
+          const columnMeta = newColumn?.columnDef.meta;
+          if (columnMeta?.variant === "select" || columnMeta?.variant === "multiSelect") {
+            updatedFilter.operator = "includes";
+          } else if (columnMeta?.variant === "date") {
+            updatedFilter.operator = "equals";
+          } else if (columnMeta?.variant === "number") {
+            updatedFilter.operator = "equals";
+          } else {
+            updatedFilter.operator = "contains";
+          }
+        }
+        return updatedFilter;
+      }
+      return f;
+    }));
   };
 
   const resetFilters = () => {
@@ -206,56 +236,23 @@ function AdvancedFilterSystem({ table, advancedFilters, setAdvancedFilters }) {
 
   return (
     <div className="flex items-center gap-2">
-      {/* Display active filters */}
-      {advancedFilters.map((filter, index) => (
-        <AdvancedFilterItem
-          key={filter.id}
-          filter={filter}
-          index={index}
-          columns={filterableColumns}
-          onUpdate={updateFilter}
-          onRemove={removeFilter}
-        />
-      ))}
-      
-      {/* Reset button */}
-      {advancedFilters.length > 0 && (
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={resetFilters}
-          className="h-8"
-        >
-          Reset filters
-        </Button>
-      )}
-
       {/* Filter button/popover */}
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" size="sm" className="h-9">
+          <Button variant="outline" size="sm" className="items-center justify-between gap-2 text-sm h-9">
             <Filter className="w-4 h-4 mr-2" />
             Filters
             {advancedFilters.length > 0 && (
-              <span className="ml-1 rounded-full bg-primary text-primary-foreground px-1.5 py-0.5 text-xs">
+              <span className="items-center justify-center px-2 py-1 text-xs rounded-full bg-primary text-primary-foreground">
                 {advancedFilters.length}
               </span>
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="p-4 w-96" align="start">
+        <PopoverContent className="w-full p-4" align="start">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h4 className="font-medium">Filters</h4>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={addFilter}
-                className="h-8"
-              >
-                <Plus className="w-4 h-4 mr-1" />
-                Add filter
-              </Button>
+              <span className="text-sm font-medium">Filters</span>
             </div>
             
             {advancedFilters.length === 0 ? (
@@ -276,36 +273,36 @@ function AdvancedFilterSystem({ table, advancedFilters, setAdvancedFilters }) {
                 ))}
               </div>
             )}
+            
+            {/* Action buttons at the bottom */}
+            <div className="flex items-center gap-2.5 pt-2 border-t">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={addFilter}
+                className="h-8 font-bold
+                hover:text-white hover:bg-[#B71D21] hover:border-[#B71D21] 
+                text-[#B71D21] bg-[#FFE4E4] border-[#FFE4E4]"
+              >
+                <Plus className="w-4 h-4 mr-1" />
+                Add filter
+              </Button>
+              
+              {advancedFilters.length > 0 && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={resetFilters}
+                  className="h-8"
+                >
+                  <X className="w-4 h-4 mr-1" />
+                  Reset filters
+                </Button>
+              )}
+            </div>
           </div>
         </PopoverContent>
       </Popover>
-    </div>
-  );
-}
-
-// Advanced Filter Item (displayed outside popover)
-function AdvancedFilterItem({ filter, index, columns, onUpdate, onRemove }) {
-  const column = columns.find(c => c.id === filter.column);
-  const columnLabel = column?.columnDef.meta?.label || filter.column;
-
-  return (
-    <div className="flex items-center gap-1 px-2 py-1 text-sm rounded bg-muted">
-      {index > 0 && (
-        <span className="mr-1 text-muted-foreground">
-          {filter.conjunction}
-        </span>
-      )}
-      <span className="font-medium">{columnLabel}</span>
-      <span className="text-muted-foreground">{filter.operator}</span>
-      <span className="truncate max-w-20">{filter.value}</span>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => onRemove(filter.id)}
-        className="w-4 h-4 h-auto p-0"
-      >
-        <X className="w-3 h-3" />
-      </Button>
     </div>
   );
 }
@@ -318,6 +315,10 @@ function AdvancedFilterEditor({ filter, index, columns, onUpdate, onRemove }) {
   const getOperators = (variant) => {
     switch (variant) {
       case "select":
+        return [
+          { value: "includes", label: "has any of" },
+          { value: "excludes", label: "has none of" },
+        ];
       case "multiSelect":
         return [
           { value: "includes", label: "has any of" },
@@ -353,16 +354,16 @@ function AdvancedFilterEditor({ filter, index, columns, onUpdate, onRemove }) {
         return (
           <DataTableFacetedFilter
             column={column}
-            title=""
+            title="Select options..."
             options={columnMeta.options || []}
-            multiple={false}
+            multiple={true}
           />
         );
       case "date":
         return (
           <DataTableDateFilter
             column={column}
-            title=""
+            title="Select date..."
             multiple={false}
           />
         );
@@ -372,38 +373,45 @@ function AdvancedFilterEditor({ filter, index, columns, onUpdate, onRemove }) {
             placeholder="Enter value..."
             value={filter.value}
             onChange={(e) => onUpdate(filter.id, { value: e.target.value })}
-            className="h-8"
+            className="w-full h-9"
           />
         );
     }
   };
 
   return (
-    <div className="p-3 space-y-2 border rounded">
-      {index > 0 && (
-        <Select
-          value={filter.conjunction}
-          onValueChange={(value) => onUpdate(filter.id, { conjunction: value })}
-        >
-          <SelectTrigger className="w-20 h-8">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="and">and</SelectItem>
-            <SelectItem value="or">or</SelectItem>
-          </SelectContent>
-        </Select>
-      )}
-      
-      <div className="flex items-center gap-2">
-        <div className="grid flex-1 grid-cols-3 gap-2">
-          {/* Column Selector */}
+    <div className="w-fit">
+      <div className="flex items-center justify-between gap-2.5">
+        {/* Where/Conjunction Selector */}
+        {index === 0 ? (
+          <div className="flex items-center justify-center w-20">
+            <span className="text-sm font-medium text-muted-foreground">
+              Where
+            </span>
+          </div>
+        ) : (
+          <Select
+            value={filter.conjunction}
+            onValueChange={(value) => onUpdate(filter.id, { conjunction: value })}
+          >
+            <SelectTrigger className="w-20 h-9">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="and">and</SelectItem>
+              <SelectItem value="or">or</SelectItem>
+            </SelectContent>
+          </Select>
+        )}
+        
+        {/* Column Selector */}
+        <div className="w-32">
           <Select
             value={filter.column}
             onValueChange={(value) => onUpdate(filter.id, { column: value })}
           >
-            <SelectTrigger className="h-8">
-              <SelectValue placeholder="Column" />
+            <SelectTrigger className="w-full h-9">
+              <SelectValue placeholder="Select column..." />
             </SelectTrigger>
             <SelectContent>
               {columns.map((column) => (
@@ -413,14 +421,16 @@ function AdvancedFilterEditor({ filter, index, columns, onUpdate, onRemove }) {
               ))}
             </SelectContent>
           </Select>
+        </div>
 
-          {/* Operator Selector */}
+        {/* Operator Selector */}
+        <div className="w-32">
           <Select
             value={filter.operator}
             onValueChange={(value) => onUpdate(filter.id, { operator: value })}
           >
-            <SelectTrigger className="h-8">
-              <SelectValue placeholder="Operator" />
+            <SelectTrigger className="w-full h-9">
+              <SelectValue placeholder="Select operator..." />
             </SelectTrigger>
             <SelectContent>
               {operators.map((op) => (
@@ -430,11 +440,11 @@ function AdvancedFilterEditor({ filter, index, columns, onUpdate, onRemove }) {
               ))}
             </SelectContent>
           </Select>
+        </div>
 
-          {/* Value Input */}
-          <div className="relative">
-            {renderValueInput()}
-          </div>
+        {/* Value Input */}
+        <div className="w-48">
+          {renderValueInput()}
         </div>
 
         {/* Remove Button */}
@@ -442,9 +452,9 @@ function AdvancedFilterEditor({ filter, index, columns, onUpdate, onRemove }) {
           variant="ghost"
           size="sm"
           onClick={() => onRemove(filter.id)}
-          className="w-8 h-8 p-0"
+          className="flex-shrink-0 w-8 h-8 p-0 border border-gray-300"
         >
-          <X className="w-4 h-4" />
+          <Trash className="w-4 h-4" />
         </Button>
       </div>
     </div>
