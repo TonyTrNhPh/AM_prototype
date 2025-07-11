@@ -12,63 +12,109 @@ import {
 import { getCommonPinningStyles } from "../../lib/data-table";
 import { cn } from "../../lib/utils";
 
-export function DataTable(
-  {
-    table,
-    actionBar,
-    children,
-    className,
-    ...props
-  }
-) {
+
+export function DataTable({ table, actionBar, children, className, ...props }) {
   return (
     <div
       className={cn("flex w-full flex-col gap-4 overflow-auto", className)}
-      {...props}>
+      {...props}
+    >
       {children}
-      <div className="overflow-hidden border rounded-md">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    colSpan={header.colSpan}
-                    style={{
-                      ...getCommonPinningStyles({ column: header.column }),
-                    }}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
+      <div className="overflow-auto border rounded-md">
+        <Table className="min-w-full">
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      className={cn(
+                        "bg-background border-b font-bold whitespace-nowrap",
+                        header.column.id === "actions" && "text-right"
+                      )}
                       style={{
-                        ...getCommonPinningStyles({ column: cell.column }),
-                      }}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
+                        ...getCommonPinningStyles({ column: header.column }),
+                        width: header.column.columnDef.size
+                          ? `${header.column.columnDef.size}px`
+                          : undefined,
+                        minWidth: header.column.columnDef.minSize
+                          ? `${header.column.columnDef.minSize}px`
+                          : undefined,
+                        maxWidth: header.column.columnDef.maxSize
+                          ? `${header.column.columnDef.maxSize}px`
+                          : undefined,
+                      }}
+                    >
+                      <div
+                        className={cn(
+                          header.column.id === "actions" && "flex justify-end pr-4"
+                        )}
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </div>
+                    </TableHead>
                   ))}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={table.getAllColumns().length} className="h-24 text-center">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        key={cell.id}
+                        className={cn(
+                          "whitespace-nowrap",
+                          cell.column.id === "actions" && "text-right"
+                        )}
+                        style={{
+                          ...getCommonPinningStyles({ column: cell.column }),
+                          width: cell.column.columnDef.size
+                            ? `${cell.column.columnDef.size}px`
+                            : undefined,
+                          minWidth: cell.column.columnDef.minSize
+                            ? `${cell.column.columnDef.minSize}px`
+                            : undefined,
+                          maxWidth: cell.column.columnDef.maxSize
+                            ? `${cell.column.columnDef.maxSize}px`
+                            : undefined,
+                        }}
+                      >
+                        <div
+                          className={cn(
+                            cell.column.id === "actions" && "flex justify-end pr-4"
+                          )}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </div>
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={table.getAllColumns().length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
         </Table>
       </div>
       <div className="flex flex-col gap-2.5">

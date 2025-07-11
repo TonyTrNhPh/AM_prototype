@@ -32,7 +32,7 @@ function App() {
         </div>
         <div className="flex flex-col w-full gap-6">
           <HeaderContainer currentMenu={currentMenu} />
-          <main className="flex-1 overflow-auto bg-white rounded-lg shadow-sm">
+          <main className="flex-1 overflow-hidden bg-white rounded-lg shadow-sm">
             <CurrentPageComponent 
               menuItem={currentMenu}
             />

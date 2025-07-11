@@ -71,11 +71,14 @@ import {
   Gift,
   Wrench,
   CheckCircle,
-  AlertTriangle
+  AlertTriangle,
+  FileDown,
+
 } from 'lucide-react';
 
 const iconRegistry = {
   // Basic Actions
+  'file-down': FileDown,
   'layout-dashboard':LayoutDashboard,
   'save': Save,
   'phone': Phone,

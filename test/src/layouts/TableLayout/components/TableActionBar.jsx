@@ -16,7 +16,7 @@ function TableActionBar({ table, actionBarItems }) {
   // Default actions if no custom actions provided
   const defaultActions = [
     {
-      icon: "download",
+      icon: "file-down",
       onClick: (selectedRows) => {
         console.log(`Exporting ${selectedRows.length} items`);
         alert(`Exporting ${selectedRows.length} items`);
@@ -54,8 +54,8 @@ function TableActionBar({ table, actionBarItems }) {
           disabled={action.disabled}
         >
           <IconHolder 
-            iconName={action.icon} 
-            className="w-4 h-4" 
+            name={action.icon} 
+            className="w-4 h-4 text-gray-500" 
           />
         </DataTableActionBarAction>
       ))}
