@@ -1,4 +1,10 @@
 import { flexRender } from "@tanstack/react-table";
+import { 
+  ChevronUp, 
+  ChevronDown, 
+  ChevronsUpDown, 
+  EyeOff 
+} from "lucide-react";
 
 import { DataTablePagination } from "./data-table-pagination";
 import {
@@ -9,6 +15,14 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import { getCommonPinningStyles } from "../../lib/data-table";
 import { cn } from "../../lib/utils";
 
@@ -48,15 +62,62 @@ export function DataTable({ table, actionBar, children, className, ...props }) {
                     >
                       <div
                         className={cn(
-                          header.column.id === "actions" && "flex justify-end pr-4"
+                          "flex items-center gap-2",
+                          header.column.id === "actions" && "justify-end pr-4"
                         )}
                       >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                        <div className="flex items-center justify-center gap-2">
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                              {header.column.getCanSort() || header.column.getCanHide() ? (
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="w-6 h-6 p-0 hover:bg-muted"
+                              >
+                                <ChevronsUpDown className="w-3 h-3" />
+                                <span className="sr-only">Column options</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              {header.column.getCanSort() && (
+                                <>
+                                  <DropdownMenuItem
+                                    onClick={() => header.column.toggleSorting(false)}
+                                  >
+                                    <ChevronUp className="w-4 h-4 mr-2" />
+                                    Sort Ascending
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem
+                                    onClick={() => header.column.toggleSorting(true)}
+                                  >
+                                    <ChevronDown className="w-4 h-4 mr-2" />
+                                    Sort Descending
+                                  </DropdownMenuItem>
+                                  {header.column.getCanHide() && (
+                                    <DropdownMenuSeparator />
+                                  )}
+                                </>
+                              )}
+                              {header.column.getCanHide() && (
+                                <DropdownMenuItem
+                                  onClick={() => header.column.toggleVisibility(false)}
+                                >
+                                  <EyeOff className="w-4 h-4 mr-2" />
+                                  Hide Column
+                                </DropdownMenuItem>
+                              )}
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        ) : null}
+                        </div>
+                        
                       </div>
                     </TableHead>
                   ))}
@@ -86,7 +147,7 @@ export function DataTable({ table, actionBar, children, className, ...props }) {
                             ? `${cell.column.columnDef.minSize}px`
                             : undefined,
                           maxWidth: cell.column.columnDef.maxSize
-                            ? `${cell.column.columnDef.maxSize}px`
+                            ? `${250}px`
                             : undefined,
                         }}
                       >

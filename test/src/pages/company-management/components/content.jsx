@@ -1,8 +1,6 @@
 import { NuqsAdapter } from "nuqs/adapters/react";
 import {
   MoreHorizontal,
-  Download,
-  Upload,
   Trash2,
   Edit,
   Eye,
