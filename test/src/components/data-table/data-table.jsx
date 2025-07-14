@@ -1,3 +1,4 @@
+import * as React from "react";
 import { flexRender } from "@tanstack/react-table";
 import { 
   ChevronUp, 
@@ -23,19 +24,45 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { 
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from "../ui/context-menu";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { getCommonPinningStyles } from "../../lib/data-table";
 import { cn } from "../../lib/utils";
 
 
-export function DataTable({ table, actionBar, children, className, ...props }) {
+
+export function DataTable({ table, actionBar, children, className, rowActions, ...props }) {
+  const [openDropdown, setOpenDropdown] = React.useState(null);
+  const [openContextMenu, setOpenContextMenu] = React.useState(null);
+
+  // Close dropdown when context menu opens
+  const handleContextMenuOpen = (rowId) => {
+    setOpenDropdown(null);
+    setOpenContextMenu(rowId);
+  };
+
+  // Close context menu when dropdown opens
+  const handleDropdownOpen = (headerId) => {
+    setOpenContextMenu(null);
+    setOpenDropdown(headerId);
+  };
+  
   return (
     <div
-      className={cn("flex w-full flex-col gap-4 overflow-auto", className)}
+      className={cn("flex w-full flex-col gap-4", className)}
       {...props}
     >
       {children}
-      <div className="overflow-auto border rounded-md">
-        <Table className="min-w-full">
+      <div className="border rounded-md">
+        <ScrollArea className="h-full w-full max-w-[1450px]">
+          <div className="min-w-max">
+            <Table className="w-full">
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
@@ -74,7 +101,16 @@ export function DataTable({ table, actionBar, children, className, ...props }) {
                                 header.getContext()
                               )}
                               {header.column.getCanSort() || header.column.getCanHide() ? (
-                          <DropdownMenu>
+                          <DropdownMenu 
+                            open={openDropdown === header.id}
+                            onOpenChange={(open) => {
+                              if (open) {
+                                handleDropdownOpen(header.id);
+                              } else {
+                                setOpenDropdown(null);
+                              }
+                            }}
+                          >
                             <DropdownMenuTrigger asChild>
                               <Button
                                 variant="ghost"
@@ -127,10 +163,23 @@ export function DataTable({ table, actionBar, children, className, ...props }) {
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
-                  <TableRow
+                  <ContextMenu 
                     key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
+                    open={openContextMenu === row.id}
+                    onOpenChange={(open) => {
+                      if (open) {
+                        handleContextMenuOpen(row.id);
+                      } else {
+                        setOpenContextMenu(null);
+                      }
+                    }}
                   >
+                    <ContextMenuTrigger asChild>
+                      <TableRow
+                        key={row.id}
+                        data-state={row.getIsSelected() && "selected"}
+                        className="cursor-pointer"
+                      >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}
@@ -163,7 +212,23 @@ export function DataTable({ table, actionBar, children, className, ...props }) {
                         </div>
                       </TableCell>
                     ))}
-                  </TableRow>
+                      </TableRow>
+                    </ContextMenuTrigger>
+                    <ContextMenuContent className="w-fit">
+                      {rowActions && rowActions.map((action, index) => (
+                        <div key={index}>
+                          <ContextMenuItem
+                            onClick={() => action.onClick(row.original)}
+                            className={action.className}
+                          >
+                            {action.icon && <span className="w-4 h-4 mr-2">{action.icon}</span>}
+                            {action.label}
+                          </ContextMenuItem>
+                          {action.separator && <ContextMenuSeparator />}
+                        </div>
+                      ))}
+                    </ContextMenuContent>
+                  </ContextMenu>
                 ))
               ) : (
                 <TableRow>
@@ -176,7 +241,10 @@ export function DataTable({ table, actionBar, children, className, ...props }) {
                 </TableRow>
               )}
             </TableBody>
-        </Table>
+            </Table>
+          </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </div>
       <div className="flex flex-col gap-2.5">
         <DataTablePagination table={table} />

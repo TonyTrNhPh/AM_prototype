@@ -27,6 +27,7 @@ function TableLayout({
   enablePagination = true,
   className = "",
   actionBarItems = [],
+  rowActions = [],
   children,
   title = "",
   subtitle = "",
@@ -94,7 +95,7 @@ function TableLayout({
     <div className={`space-y-4 ${className}`} {...props}>
       <TableTitle title={title} subtitle={subtitle} icon={icon} />
       {customToolbar}
-      <DataTable table={table} actionBar={actionBar} />
+      <DataTable table={table} actionBar={actionBar} rowActions={rowActions} />
     </div>
   );
 }
