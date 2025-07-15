@@ -146,7 +146,7 @@ function NotificationBell() {
           />
           {totalUnreadCount > 0 && (
             <Badge 
-              variant="destructive" 
+              variant="default" 
               className="absolute flex items-center justify-center w-4 h-4 p-0 text-xs -top-1 -right-1"
             >
               {totalUnreadCount > 9 ? '9+' : totalUnreadCount}

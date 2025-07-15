@@ -12,6 +12,8 @@ import {
 
 // Data Table Components
 import { DataTable } from "@/components/data-table/data-table";
+import { Button } from "@/components/ui/button";
+import IconHolder from "@/components/ui/iconholder";
 
 // Table Layout Components
 import TableTitle from "./components/TableTitle";
@@ -32,6 +34,7 @@ function TableLayout({
   title = "",
   subtitle = "",
   icon = "",
+  btnNewText,
   ...props
 }) {
   const [sorting, setSorting] = React.useState([]);
@@ -91,9 +94,56 @@ function TableLayout({
     />
   );
 
+  // Button Group Component
+  const buttonGroup = (
+    <div className="flex items-center gap-2">
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => {
+          // Export functionality
+          alert("Export functionality");
+        }}
+        className="flex items-center gap-2"
+      >
+        <IconHolder name="download" size="sm" />
+        Export
+      </Button>
+      
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => {
+          // Import functionality
+          alert("Import functionality");
+        }}
+        className="flex items-center gap-2"
+      >
+        <IconHolder name="upload" size="sm" />
+        Import
+      </Button>
+      
+      <Button
+        variant="default"
+        size="sm"
+        onClick={() => {
+          // New functionality
+          alert("New item functionality");
+        }}
+        className="flex items-center gap-2"
+      >
+        <IconHolder name="plus" size="sm" />
+        New {btnNewText}
+      </Button>
+    </div>
+  );
+
   return (
     <div className={`space-y-4 ${className}`} {...props}>
-      <TableTitle title={title} subtitle={subtitle} icon={icon} />
+      <div className="flex items-center justify-between">
+        <TableTitle title={title} subtitle={subtitle} icon={icon} />
+        {buttonGroup}
+      </div>
       {customToolbar}
       <DataTable table={table} actionBar={actionBar} rowActions={rowActions} />
     </div>

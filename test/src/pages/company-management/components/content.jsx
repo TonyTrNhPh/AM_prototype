@@ -103,8 +103,8 @@ function Content({ menuItem }) {
   // Badge components
   const TypeBadge = ({ type }) => {
     const variants = {
-      bug: "destructive",
-      enhancement: "default",
+      bug: "default",
+      enhancement: "destructive",
       documentation: "secondary",
       feature: "outline",
     };
@@ -118,7 +118,7 @@ function Content({ menuItem }) {
 
   const StatusBadge = ({ status }) => {
     const variants = {
-      todo: "outline",
+      todo: "destructive",
       "in-progress": "default",
       done: "secondary",
     };
@@ -139,8 +139,8 @@ function Content({ menuItem }) {
   const PriorityBadge = ({ priority }) => {
     const variants = {
       low: "outline",
-      medium: "default",
-      high: "destructive",
+      medium: "destructive",
+      high: "default",
     };
 
     return (
@@ -658,6 +658,7 @@ function Content({ menuItem }) {
             title={"Quản lý công ty"}
             subtitle={"Quản lý thông tin các công ty trong hệ thống"}
             icon="building-2"
+            btnNewText="company"
             rowActions={rowActions}
           />
         </ScrollArea>

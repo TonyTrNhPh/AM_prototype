@@ -20,6 +20,8 @@ import {
   EllipsisVertical,
   Printer,
   Building2,
+  Download,
+  Upload,
   
   // Status and verification
   CircleCheckBig,
@@ -79,6 +81,8 @@ import {
 const iconRegistry = {
   // Basic Actions
   'file-down': FileDown,
+  'download': Download,
+  'upload': Upload,
   'layout-dashboard':LayoutDashboard,
   'save': Save,
   'phone': Phone,
