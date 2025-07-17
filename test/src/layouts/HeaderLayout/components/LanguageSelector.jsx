@@ -27,7 +27,7 @@ function LanguageSelector() {
     if (language.flagComponent) {
       const FlagComponent = language.flagComponent;
       return (
-        <div className={`${currentSize} flex justify-center items-center rounded-sm overflow-hidden border border-gray-200`}>
+        <div className={`${currentSize} flex justify-center items-center rounded-sm overflow-hidden border transition-colors`} style={{ borderColor: 'var(--border)' }}>
           <FlagComponent 
             className="object-cover w-full h-full"
             style={{ width: '100%', height: '100%' }}
@@ -38,7 +38,7 @@ function LanguageSelector() {
 
     // Fallback to emoji if no flag component
     return (
-      <span className={`${currentSize} flex items-center justify-center text-sm rounded-sm border border-gray-200`}>
+      <span className={`${currentSize} flex items-center justify-center text-sm rounded-sm border`} style={{ borderColor: 'var(--border)' }}>
         {language.flag}
       </span>
     );
@@ -49,23 +49,40 @@ function LanguageSelector() {
     return (
       <button
         onClick={() => onClick(language)}
-        className={`w-full flex items-center px-3 py-2 text-sm text-left transition-colors duration-200 ${
-          isSelected 
-            ? 'bg-[#FFE4E4] text-[#B71D21]' 
-            : 'text-gray-700 hover:bg-gray-50'
-        }`}
+        className="w-full flex items-center px-3 py-2 text-sm text-left transition-colors duration-200"
+        style={{
+          backgroundColor: isSelected ? 'var(--brand-accent-light)' : 'transparent',
+          color: isSelected ? 'var(--brand-accent)' : 'var(--text-primary)'
+        }}
+        onMouseEnter={(e) => {
+          if (!isSelected) {
+            e.target.style.backgroundColor = 'var(--background-secondary)';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isSelected) {
+            e.target.style.backgroundColor = 'transparent';
+          }
+        }}
       >
         {/* Selection indicator */}
         <div className="flex justify-center w-4 mr-3">
           {isSelected && (
-            <div className="w-2 h-2 bg-[#B71D21] rounded-full"></div>
+            <div 
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: 'var(--brand-accent)' }}
+            ></div>
           )}
         </div>
         
         {/* Language code and name */}
         <div className="flex items-center">
           <span className="mr-2 font-semibold">{language.code}</span>
-          <span className={isSelected ? 'text-[#B71D21]' : 'text-gray-600'}>
+          <span 
+            style={{ 
+              color: isSelected ? 'var(--brand-accent)' : 'var(--text-secondary)' 
+            }}
+          >
             {language.name}
           </span>
         </div>
@@ -77,7 +94,14 @@ function LanguageSelector() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition-colors duration-200 rounded-lg hover:bg-gray-100"
+        className="flex items-center px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg"
+        style={{ color: 'var(--text-primary)' }}
+        onMouseEnter={(e) => {
+          e.target.style.backgroundColor = 'var(--background-secondary)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.backgroundColor = 'transparent';
+        }}
       >
         <div className="mr-2">
           <LanguageFlag language={selectedLanguage} size="default" />
@@ -86,7 +110,8 @@ function LanguageSelector() {
         <IconHolder 
           name="chevron-down" 
           size={16} 
-          className={`text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          style={{ color: 'var(--text-disabled)' }}
         />
       </button>
 
@@ -96,14 +121,27 @@ function LanguageSelector() {
             className="fixed inset-0 z-10" 
             onClick={() => setIsOpen(false)}
           ></div>
-          <div className="absolute right-0 z-20 w-48 px-0 py-2 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg">
+          <div 
+            className="absolute right-0 z-20 w-48 px-0 py-2 mt-1 rounded-lg shadow-lg border"
+            style={{ 
+              backgroundColor: 'var(--background-primary)',
+              borderColor: 'var(--border)'
+            }}
+          >
             {/* Header */}
-            <div className="px-3 py-2 border-b border-gray-100">
-              <div className="flex items-center text-sm text-gray-600">
+            <div 
+              className="px-3 py-2 border-b"
+              style={{ borderBottomColor: 'var(--border)' }}
+            >
+              <div 
+                className="flex items-center text-sm"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 <IconHolder 
                   name="globe" 
                   size={16} 
-                  className="mr-2 text-gray-500"
+                  className="mr-2"
+                  style={{ color: 'var(--text-disabled)' }}
                 />
                 <span>Chọn ngôn ngữ</span>
               </div>

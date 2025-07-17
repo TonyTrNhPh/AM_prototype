@@ -12,7 +12,7 @@ function Sidebar({
   return (
     <Card 
       className={cn(
-        "flex flex-col items-start w-full h-full p-6 bg-white max-w-2xs rounded-2xl gap-6",
+        "flex flex-col items-start w-full h-full p-6 bg-sidebar max-w-2xs rounded-2xl gap-6",
         className
       )}
       {...props}

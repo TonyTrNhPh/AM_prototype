@@ -37,43 +37,87 @@ function UserProfileDropdown() {
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          className="flex items-center h-auto px-3 py-2 text-sm transition-colors duration-200 hover:bg-gray-100"
+          className="flex items-center h-auto px-3 py-2 text-sm transition-colors duration-200"
+          style={{
+            backgroundColor: 'transparent'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = 'var(--background-secondary)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+          }}
         >
           {/* Avatar */}
           <Avatar className="w-8 h-8">
-            <AvatarFallback className="bg-[#B71D21] text-white text-sm font-semibold">
+            <AvatarFallback 
+              className="text-white text-sm font-semibold"
+              style={{ backgroundColor: 'var(--brand-accent)' }}
+            >
               {user.avatar}
             </AvatarFallback>
           </Avatar>
           
           {/* User Info */}
           <div className="mr-2 text-left">
-            <div className="font-semibold text-gray-800">{user.name}</div>
-            <div className="text-xs text-gray-500">{user.role}</div>
+            <div 
+              className="font-semibold"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              {user.name}
+            </div>
+            <div 
+              className="text-xs"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              {user.role}
+            </div>
           </div>
           
           {/* Dropdown Arrow */}
           <IconHolder 
             name="chevron-down" 
             size={16} 
-            className={`text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            style={{ color: 'var(--text-disabled)' }}
           />
         </Button>
       </PopoverTrigger>
       
       <PopoverContent className="w-64 p-0" align="end">
         {/* User Info Header */}
-        <div className="px-4 py-3 border-b border-gray-100">
+        <div 
+          className="px-4 py-3 border-b"
+          style={{ borderBottomColor: 'var(--border)' }}
+        >
           <div className="flex items-center">
             <Avatar className="w-10 h-10 mr-3">
-              <AvatarFallback className="bg-[#B71D21] text-white text-sm font-semibold">
+              <AvatarFallback 
+                className="text-white text-sm font-semibold"
+                style={{ backgroundColor: 'var(--brand-accent)' }}
+              >
                 {user.avatar}
               </AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-semibold text-gray-800">{user.name}</div>
-              <div className="text-sm text-gray-500">{user.role}</div>
-              <div className="text-xs text-gray-400">{user.email}</div>
+              <div 
+                className="font-semibold"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                {user.name}
+              </div>
+              <div 
+                className="text-sm"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                {user.role}
+              </div>
+              <div 
+                className="text-xs"
+                style={{ color: 'var(--text-disabled)' }}
+              >
+                {user.email}
+              </div>
             </div>
           </div>
         </div>

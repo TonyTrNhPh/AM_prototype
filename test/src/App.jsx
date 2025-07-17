@@ -26,13 +26,13 @@ function App() {
         message="Cố lên, cố lên, sắp tới rồi sắp tới rồi..."
       />
 
-      <div className="flex h-screen gap-6 p-6 bg-gray-100">
+      <div className="flex h-screen gap-6 p-6" style={{ backgroundColor: 'var(--app-background)' }}>
         <div className="w-full max-w-2xs">
           <SidebarContainer onMenuChange={setCurrentMenu} />
         </div>
         <div className="flex flex-col w-full gap-6">
           <HeaderContainer currentMenu={currentMenu} />
-          <main className="flex-1 overflow-hidden bg-white rounded-lg shadow-sm">
+          <main className="flex-1 overflow-hidden rounded-lg shadow-sm" style={{ backgroundColor: 'var(--main-background)' }}>
             <CurrentPageComponent 
               menuItem={currentMenu}
             />

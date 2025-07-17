@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 import { IconHolder } from "@/config";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Badge } from "@/components/ui/badge";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,} from "@/components/ui/breadcrumb";
 import UserProfileDropdown from "./components/UserProfileMenu";
 import LanguageSelector from "./components/LanguageSelector";
 import NotificationBell from "./components/NotificationBell";
@@ -57,7 +49,7 @@ function HeaderLayout({ currentMenu = null }) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbPage className="text-sm font-bold text-gray-800">
+              <BreadcrumbPage className="text-sm font-bold text-primary">
                 Bảng điều khiển
               </BreadcrumbPage>
             </BreadcrumbItem>
@@ -72,7 +64,7 @@ function HeaderLayout({ currentMenu = null }) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbPage className="text-sm font-bold text-gray-800">
+              <BreadcrumbPage className="text-sm font-bold text-primary">
                 {displayMenu.label}
               </BreadcrumbPage>
             </BreadcrumbItem>
@@ -87,14 +79,14 @@ function HeaderLayout({ currentMenu = null }) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink className="text-sm font-bold text-gray-500 hover:text-gray-700">
+              <BreadcrumbLink className="text-sm font-bold transition-colors text-secondary hover:text-primary">
                 {displayMenu.parent.label}
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbPage className="flex items-center space-x-2">
-                <span className="text-sm font-bold text-gray-800">{displayMenu.label}</span>
+                <span className="text-sm font-bold text-primary">{displayMenu.label}</span>
               </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
@@ -108,13 +100,13 @@ function HeaderLayout({ currentMenu = null }) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink className="text-sm text-gray-500 hover:text-gray-700">
+              <BreadcrumbLink className="text-sm transition-colors text-secondary hover:text-primary">
                 {displayMenu.label}
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage className="text-sm font-bold text-gray-800">
+              <BreadcrumbPage className="text-sm font-bold text-primary">
                 {displayMenu.activeChild.label}
               </BreadcrumbPage>
             </BreadcrumbItem>
@@ -128,7 +120,7 @@ function HeaderLayout({ currentMenu = null }) {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbPage className="text-sm font-bold text-gray-800">
+            <BreadcrumbPage className="text-sm font-bold text-primary">
               {displayMenu.label}
             </BreadcrumbPage>
           </BreadcrumbItem>
@@ -138,9 +130,15 @@ function HeaderLayout({ currentMenu = null }) {
   };
 
   return (
-    <header className="px-6 py-3 bg-white border-b border-gray-200 rounded-2xl shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.1)]">
+    <header 
+      className="px-6 py-3 transition-colors duration-300 border-b rounded-2xl"
+      style={{ 
+        backgroundColor: 'var(--header-background)',
+        borderColor: 'var(--header-border)',
+        boxShadow: '0px 2px 8px 0px var(--header-shadow)'
+      }}
+    >
       <div className="flex items-center justify-between w-full">
-        {/* Left Section - Logo/Title with Animation */}
         <div className="flex items-center">
           <div className={`transition-all duration-300 ease-in-out ${
             isAnimating ? 'opacity-0 translate-x-2' : 'opacity-100 translate-x-0'
@@ -148,7 +146,8 @@ function HeaderLayout({ currentMenu = null }) {
             <IconHolder 
               name={getMenuIcon()} 
               size={24} 
-              className="mr-3 text-gray-600" 
+              className="mr-3"
+              style={{ color: 'var(--text-secondary)' }}
             />
           </div>
           <div className={`transition-all duration-300 ease-in-out ${
@@ -157,8 +156,6 @@ function HeaderLayout({ currentMenu = null }) {
             {renderBreadcrumb()}
           </div>
         </div>
-
-        {/* Right Section - Notifications, Language, User */}
         <div className="flex items-center gap-6">
           <NotificationBell />
           <LanguageSelector />

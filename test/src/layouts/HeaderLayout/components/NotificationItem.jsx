@@ -13,9 +13,17 @@ function NotificationItem({ notification, onClick }) {
   return (
     <div
       onClick={handleClick}
-      className={`px-4 py-3 border-b border-gray-100 cursor-pointer transition-colors duration-200 hover:bg-gray-50 ${
-        !notification.isRead ? 'bg-blue-50' : ''
-      }`}
+      className="px-4 py-3 cursor-pointer transition-colors duration-200"
+      style={{
+        borderBottom: '1px solid var(--border)',
+        backgroundColor: !notification.isRead ? 'var(--brand-accent-light)' : 'transparent'
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.backgroundColor = 'var(--background-secondary)';
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.backgroundColor = !notification.isRead ? 'var(--brand-accent-light)' : 'transparent';
+      }}
     >
       <div className="flex justify-between">
         {/* Left side: Icon + Content */}
@@ -27,20 +35,29 @@ function NotificationItem({ notification, onClick }) {
               size={16} 
               style={{ color: notificationType.color }}
             />
-            <p className={`text-sm font-medium ${
-              !notification.isRead ? 'text-gray-900' : 'text-gray-700'
-            }`}>
+            <p 
+              className="text-sm font-medium"
+              style={{ 
+                color: !notification.isRead ? 'var(--text-primary)' : 'var(--text-secondary)'
+              }}
+            >
               {notification.title}
             </p>
           </div>
           
           {/* Message aligned with title */}
-          <p className="mb-1 text-sm text-gray-600 line-clamp-2">
+          <p 
+            className="mb-1 text-sm line-clamp-2"
+            style={{ color: 'var(--text-secondary)' }}
+          >
             {notification.message}
           </p>
           
           {/* Timestamp aligned with title */}
-          <p className="text-xs text-gray-400">
+          <p 
+            className="text-xs"
+            style={{ color: 'var(--text-disabled)' }}
+          >
             {formatTimeAgo(notification.timestamp)}
           </p>
         </div>
@@ -48,7 +65,10 @@ function NotificationItem({ notification, onClick }) {
         {/* Right side: Unread indicator */}
         <div className="flex-shrink-0 mt-0.5">
           {!notification.isRead && (
-            <div className="w-2 h-2 bg-[#B71D21] rounded-full"></div>
+            <div 
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: 'var(--brand-accent)' }}
+            ></div>
           )}
         </div>
       </div>

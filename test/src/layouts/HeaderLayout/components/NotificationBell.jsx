@@ -112,19 +112,28 @@ function NotificationBell() {
 
     return (
       <div className="flex flex-col items-center justify-center px-6 py-12">
-        <div className="flex items-center justify-center w-16 h-16 mb-4 bg-gray-100 rounded-full">
+        <div 
+          className="flex items-center justify-center w-16 h-16 mb-4 rounded-full"
+          style={{ backgroundColor: 'var(--background-secondary)' }}
+        >
           <IconHolder 
             name="bell" 
             size={24} 
-            className="text-gray-400"
+            style={{ color: 'var(--text-disabled)' }}
           />
         </div>
         
-        <h4 className="mb-2 text-sm font-medium text-center text-gray-900">
+        <h4 
+          className="mb-2 text-sm font-medium text-center"
+          style={{ color: 'var(--text-primary)' }}
+        >
           {title}
         </h4>
         
-        <p className="max-w-xs text-sm text-center text-gray-500">
+        <p 
+          className="max-w-xs text-sm text-center"
+          style={{ color: 'var(--text-secondary)' }}
+        >
           {message}
         </p>
       </div>
@@ -142,12 +151,13 @@ function NotificationBell() {
           <IconHolder 
             name="bell" 
             size={20} 
-            className="text-gray-500" 
+            style={{ color: 'var(--text-secondary)' }}
           />
           {totalUnreadCount > 0 && (
             <Badge 
               variant="default" 
               className="absolute flex items-center justify-center w-4 h-4 p-0 text-xs -top-1 -right-1"
+              style={{ backgroundColor: 'var(--brand-accent)', color: 'white' }}
             >
               {totalUnreadCount > 9 ? '9+' : totalUnreadCount}
             </Badge>
@@ -162,9 +172,14 @@ function NotificationBell() {
             <IconHolder 
               name="bell"
               size={20}
-              className="text-gray-900"
+              style={{ color: 'var(--text-primary)' }}
             />
-            <h3 className="text-sm font-semibold text-gray-900">Thông báo</h3>
+            <h3 
+              className="text-sm font-semibold"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Thông báo
+            </h3>
           </div>
           
           <div className="flex items-center space-x-2">
@@ -173,9 +188,17 @@ function NotificationBell() {
               <Switch
                 checked={showUnreadOnly}
                 onCheckedChange={setShowUnreadOnly}
-                className="data-[state=checked]:bg-[#B71D21]"
+                style={{
+                  '--switch-checked-bg': 'var(--brand-accent)',
+                  backgroundColor: showUnreadOnly ? 'var(--brand-accent)' : undefined
+                }}
               />
-              <span className="text-sm text-gray-600">Chưa đọc</span>
+              <span 
+                className="text-sm"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                Chưa đọc
+              </span>
             </div>
 
             {/* Action buttons */}

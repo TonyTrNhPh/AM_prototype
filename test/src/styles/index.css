@@ -9,6 +9,12 @@
   --amnote-blue: #667280;
   --amnote-gray: #D8D8E4;
   --radius: 0.625rem;
+  
+  /* Easing variables for animations */
+  --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --expo-in: cubic-bezier(0.7, 0, 0.84, 0);
+  
+  /* Light theme colors */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -27,6 +33,24 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+  
+  /* Additional semantic colors */
+  --app-background: rgb(242, 243, 245);
+  --header-background: var(--background);
+  --header-border: var(--border);
+  --header-shadow: rgba(0, 0, 0, 0.1);
+  --sidebar-background: var(--background);
+  --main-background: var(--background);
+  --text-primary: var(--foreground);
+  --text-secondary: var(--muted-foreground);
+  --text-accent: var(--primary);
+  --text-disabled: oklch(0.708 0 0);
+  --background-primary: var(--background);
+  --background-secondary: oklch(0.97 0 0);
+  --brand-primary: #B71D21;
+  --brand-accent: #B71D21;
+  --brand-accent-light: #FFE4E4;
+  --brand-accent-dark: #8B1518;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -48,7 +72,9 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(242, 243, 245)
+  background-color: var(--app-background);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
@@ -73,6 +99,89 @@ body {
 
 .scrollbar-hover::-webkit-scrollbar {
   display: none; /* Webkit */
+}
+
+/* Text color utilities using CSS variables */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-accent {
+  color: var(--text-accent);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.bg-header {
+  background-color: var(--header-background);
+}
+
+.bg-sidebar {
+  background-color: var(--sidebar-background);
+}
+
+.bg-main {
+  background-color: var(--main-background);
+}
+
+.border-header {
+  border-color: var(--header-border);
+}
+
+/* Additional utility classes for common patterns */
+.hover-text-primary:hover {
+  color: var(--text-primary);
+}
+
+.hover-text-accent:hover {
+  color: var(--text-accent);
+}
+
+.transition-theme {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Override hardcoded Tailwind colors with CSS variables */
+.bg-gray-100 {
+  background-color: var(--secondary) !important;
+}
+
+.bg-gray-200 {
+  background-color: var(--muted) !important;
+}
+
+.text-gray-500 {
+  color: var(--text-secondary) !important;
+}
+
+.text-gray-600 {
+  color: var(--text-secondary) !important;
+}
+
+.text-gray-700 {
+  color: var(--text-primary) !important;
+}
+
+.text-gray-800 {
+  color: var(--text-primary) !important;
+}
+
+.text-gray-900 {
+  color: var(--text-primary) !important;
+}
+
+.border-gray-200 {
+  border-color: var(--border) !important;
+}
+
+.border-gray-300 {
+  border-color: var(--border) !important;
 }
 
 @theme inline {
@@ -132,6 +241,17 @@ body {
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
+  
+  /* Dark theme semantic colors */
+  --app-background: oklch(0.092 0 0);
+  --header-background: var(--card);
+  --header-border: var(--border);
+  --header-shadow: rgba(255, 255, 255, 0.1);
+  --sidebar-background: var(--card);
+  --main-background: var(--card);
+  --text-primary: var(--foreground);
+  --text-secondary: var(--muted-foreground);
+  --text-accent: var(--primary);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);

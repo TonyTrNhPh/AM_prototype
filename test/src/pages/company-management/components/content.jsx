@@ -171,22 +171,33 @@ function Content({ menuItem }) {
 
   const ProgressBar = ({ progress }) => {
     const getProgressColor = (value) => {
-      if (value === 0) return "bg-gray-200";
-      if (value <= 25) return "bg-red-500";
-      if (value <= 50) return "bg-yellow-500";
-      if (value <= 75) return "bg-blue-500";
-      return "bg-green-500";
+      if (value === 0) return "var(--text-disabled)";
+      if (value <= 25) return "#ef4444"; // red-500
+      if (value <= 50) return "#eab308"; // yellow-500
+      if (value <= 75) return "#3b82f6"; // blue-500
+      return "#22c55e"; // green-500
     };
 
     return (
       <div className="flex items-center gap-2 min-w-[100px]">
-        <div className="flex-1 h-2 bg-gray-200 rounded-full">
+        <div 
+          className="flex-1 h-2 rounded-full"
+          style={{ backgroundColor: 'var(--background-secondary)' }}
+        >
           <div
-            className={`h-2 rounded-full transition-all duration-300 ${getProgressColor(progress)}`}
-            style={{ width: `${progress}%` }}
+            className="h-2 transition-all duration-300 rounded-full"
+            style={{ 
+              width: `${progress}%`,
+              backgroundColor: getProgressColor(progress)
+            }}
           />
         </div>
-        <span className="w-8 text-xs font-medium text-right">{progress}%</span>
+        <span 
+          className="w-8 text-xs font-medium text-right"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          {progress}%
+        </span>
       </div>
     );
   };
@@ -469,12 +480,33 @@ function Content({ menuItem }) {
                       />
                     </div>
                     <div className="flex gap-2 mt-6">
-                      <button className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">
+                      <button 
+                        className="px-4 py-2 text-white transition-colors rounded-md"
+                        style={{ 
+                          backgroundColor: 'var(--brand-accent)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = 'var(--brand-accent-dark)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = 'var(--brand-accent)';
+                        }}
+                      >
                         Save Changes
                       </button>
                       <button 
                         onClick={closeModal}
-                        className="px-4 py-2 text-gray-700 bg-gray-300 rounded-md hover:bg-gray-400"
+                        className="px-4 py-2 transition-colors rounded-md"
+                        style={{ 
+                          backgroundColor: 'var(--background-secondary)',
+                          color: 'var(--text-primary)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = 'var(--border)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = 'var(--background-secondary)';
+                        }}
                       >
                         Cancel
                       </button>
@@ -491,7 +523,7 @@ function Content({ menuItem }) {
                     alert(`Task ${task.id} deleted!`);
                   }
                 }}
-                className="text-red-600"
+                style={{ color: 'var(--brand-accent)' }}
               >
                 <Trash2 className="w-4 h-4 mr-2" />
                 Delete
@@ -616,12 +648,33 @@ function Content({ menuItem }) {
               />
             </div>
             <div className="flex gap-2 mt-6">
-              <button className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">
+              <button 
+                className="px-4 py-2 text-white transition-colors rounded-md"
+                style={{ 
+                  backgroundColor: 'var(--brand-accent)',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = 'var(--brand-accent-dark)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = 'var(--brand-accent)';
+                }}
+              >
                 Save Changes
               </button>
               <button 
                 onClick={closeModal}
-                className="px-4 py-2 text-gray-700 bg-gray-300 rounded-md hover:bg-gray-400"
+                className="px-4 py-2 transition-colors rounded-md"
+                style={{ 
+                  backgroundColor: 'var(--background-secondary)',
+                  color: 'var(--text-primary)'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = 'var(--border)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = 'var(--background-secondary)';
+                }}
               >
                 Cancel
               </button>
@@ -639,7 +692,7 @@ function Content({ menuItem }) {
           alert(`Task ${task.id} deleted!`);
         }
       },
-      className: "text-red-600",
+      style: { color: 'var(--brand-accent)' },
     },
   ];
 
