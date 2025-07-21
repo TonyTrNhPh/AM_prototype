@@ -13,7 +13,7 @@ function NotificationItem({ notification, onClick }) {
   return (
     <div
       onClick={handleClick}
-      className="px-4 py-3 cursor-pointer transition-colors duration-200"
+      className="px-4 py-3 transition-colors duration-200 cursor-pointer"
       style={{
         borderBottom: '1px solid var(--border)',
         backgroundColor: !notification.isRead ? 'var(--brand-accent-light)' : 'transparent'
