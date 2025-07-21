@@ -19,10 +19,10 @@ function NotificationItem({ notification, onClick }) {
         backgroundColor: !notification.isRead ? 'var(--brand-accent-light)' : 'transparent'
       }}
       onMouseEnter={(e) => {
-        e.target.style.backgroundColor = 'var(--background-secondary)';
+        e.currentTarget.style.backgroundColor = 'var(--background-secondary)';
       }}
       onMouseLeave={(e) => {
-        e.target.style.backgroundColor = !notification.isRead ? 'var(--brand-accent-light)' : 'transparent';
+        e.currentTarget.style.backgroundColor = !notification.isRead ? 'var(--brand-accent-light)' : 'transparent';
       }}
     >
       <div className="flex justify-between">

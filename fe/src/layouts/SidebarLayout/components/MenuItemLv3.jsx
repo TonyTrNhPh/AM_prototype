@@ -19,7 +19,7 @@ function MenuItemLv3({ title, onClick, isActive = false, className, ...props }) 
         "w-2 h-2 rounded-full mr-3 transition-colors duration-200",
         isActive 
           ? 'bg-[#B71D21]' 
-          : 'bg-gray-300 group-hover:bg-gray-900'
+          : 'bg-gray-300'
       )}></div>
       <div className="font-bold">{title}</div>
     </Button>
