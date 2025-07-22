@@ -8,7 +8,7 @@ function NotificationTabs({
   getUnreadCount 
 }) {
   return (
-    <div className="border-b" style={{ borderColor: 'var(--border)' }}>
+    <div className="border-b border-main">
       <ScrollArea className="w-full whitespace-nowrap">
         <div className="flex px-4 space-x-1">
           {Object.values(categories).map((category) => {
@@ -19,31 +19,16 @@ function NotificationTabs({
               <button
                 key={category.id}
                 onClick={() => onCategoryChange(category.id)}
-                className="flex-shrink-0 px-3 py-3 text-sm font-medium border-b-2 transition-colors duration-200"
-                style={{
-                  borderBottomColor: isActive ? 'var(--brand-accent)' : 'transparent',
-                  color: isActive ? 'var(--brand-accent)' : 'var(--text-secondary)'
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) {
-                    e.target.style.color = 'var(--text-primary)';
-                    e.target.style.borderBottomColor = 'var(--border)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) {
-                    e.target.style.color = 'var(--text-secondary)';
-                    e.target.style.borderBottomColor = 'transparent';
-                  }
-                }}
+                className={`flex-shrink-0 px-3 py-3 text-sm font-medium border-b-2 transition-colors duration-200 ${
+                  isActive ? 'tab-active' : 'tab-inactive'
+                }`}
               >
                 <div className="flex items-center space-x-2">
                   <span className="whitespace-nowrap">{category.label}</span>
                   {unreadCount > 0 && (
                     <Badge 
                       variant="secondary" 
-                      className="text-white text-xs px-1.5 py-0.5 h-5 min-w-5"
-                      style={{ backgroundColor: 'var(--brand-accent)' }}
+                      className="text-white text-xs px-1.5 py-0.5 h-5 min-w-5 bg-brand-accent"
                     >
                       {unreadCount > 99 ? '99+' : unreadCount}
                     </Badge>

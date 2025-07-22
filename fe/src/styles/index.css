@@ -147,6 +147,133 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Component-specific utility classes */
+.bg-transparent {
+  background-color: transparent;
+}
+
+.bg-background-primary {
+  background-color: var(--background-primary);
+}
+
+.bg-background-secondary {
+  background-color: var(--background-secondary);
+}
+
+.bg-brand-accent {
+  background-color: var(--brand-accent);
+}
+
+.bg-brand-accent-light {
+  background-color: var(--brand-accent-light);
+}
+
+.bg-brand-accent-dark {
+  background-color: var(--brand-accent-dark);
+}
+
+.text-brand-accent {
+  color: var(--brand-accent);
+}
+
+.text-disabled {
+  color: var(--text-disabled);
+}
+
+.border-main {
+  border-color: var(--border);
+}
+
+/* Hover state classes */
+.hover-bg-secondary:hover {
+  background-color: var(--background-secondary);
+}
+
+.hover-bg-brand-accent-dark:hover {
+  background-color: var(--brand-accent-dark);
+}
+
+.hover-border-main:hover {
+  border-color: var(--border);
+}
+
+/* Header specific classes */
+.header-bg {
+  background-color: var(--header-background);
+}
+
+.header-border {
+  border-color: var(--header-border);
+}
+
+.header-shadow {
+  box-shadow: 0px 2px 8px 0px var(--header-shadow);
+}
+
+/* Notification specific classes */
+.notification-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.notification-unread {
+  background-color: var(--brand-accent-light);
+}
+
+.notification-read {
+  background-color: transparent;
+}
+
+.notification-item:hover {
+  background-color: var(--background-secondary) !important;
+}
+
+.notification-dot {
+  background-color: var(--brand-accent);
+}
+
+/* Language selector classes */
+.language-selected-bg {
+  background-color: var(--brand-accent-light);
+}
+
+.language-selected-text {
+  color: var(--brand-accent);
+}
+
+/* Progress bar and utility classes */
+.progress-track {
+  background-color: var(--background-secondary);
+}
+
+.delete-text {
+  color: var(--brand-accent);
+}
+
+/* App layout classes */
+.app-background {
+  background-color: var(--app-background);
+}
+
+.main-background {
+  background-color: var(--main-background);
+}
+
+/* Notification tabs classes */
+.tab-active {
+  border-bottom-color: var(--brand-accent);
+  color: var(--brand-accent);
+}
+
+.tab-inactive {
+  border-bottom-color: transparent;
+  color: var(--text-secondary);
+}
+
+.tab-inactive:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--border);
+}
+
 /* Override hardcoded Tailwind colors with CSS variables */
 .bg-gray-100 {
   background-color: var(--secondary) !important;

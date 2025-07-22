@@ -6,8 +6,8 @@ import { getPageComponent } from "./utils/pageRouter";
 
 function App() {
   const [currentMenu, setCurrentMenu] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); 
-  const LOADER_DURATION = 3000; 
+  const [isLoading, setIsLoading] = useState(true);
+  const LOADER_DURATION = 3000;
 
   const handleLoaderComplete = () => {
     setIsLoading(false);
@@ -19,25 +19,20 @@ function App() {
 
   return (
     <>
-      <LoaderLayout 
-        isVisible={isLoading}
-        duration={LOADER_DURATION}
-        onComplete={handleLoaderComplete}
-        message="Cố lên, cố lên, sắp tới rồi sắp tới rồi..."
-      />
-
-      <div className="flex h-screen gap-6 p-6" style={{ backgroundColor: 'var(--app-background)' }}>
-        <div className="w-full max-w-2xs">
+      <div className="flex h-screen gap-6 p-6 app-background">
+        {/* Sidebar: fixed width */}
+        <div className="shrink-0 basis-[220px]">
           <SidebarContainer onMenuChange={setCurrentMenu} />
         </div>
-        <div className="flex flex-col w-full gap-6">
+
+        {/* Right content: flexible */}
+        <div className="flex flex-col min-w-0 gap-6 grow">
           <HeaderContainer currentMenu={currentMenu} />
-          <main className="flex-1 overflow-hidden rounded-lg shadow-sm" style={{ backgroundColor: 'var(--main-background)' }}>
-            <CurrentPageComponent 
-              menuItem={currentMenu}
-            />
+
+          <main className="flex-1 overflow-hidden rounded-lg shadow-sm main-background">
+            <CurrentPageComponent menuItem={currentMenu} />
           </main>
-        </div>      
+        </div>
       </div>
     </>
   );

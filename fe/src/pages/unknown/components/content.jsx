@@ -2,8 +2,8 @@ import { IconHolder } from "@/config";
 
 function Content() {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full px-6 py-3 bg-main border-b border-header rounded-2xl transition-colors duration-300" style={{ boxShadow: '0px 2px 8px 0px var(--header-shadow)' }}>
-      <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full" style={{ backgroundColor: 'var(--secondary)' }}>
+    <div className="flex flex-col items-center justify-center w-full h-full px-6 py-3 bg-main border-b border-header rounded-2xl transition-colors duration-300 header-shadow">
+      <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-secondary">
         <IconHolder
           name="wrench"
           size={40}

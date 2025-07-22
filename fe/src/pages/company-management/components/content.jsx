@@ -163,10 +163,7 @@ function Content({ menuItem }) {
 
     return (
       <div className="flex items-center gap-2 min-w-[100px]">
-        <div 
-          className="flex-1 h-2 rounded-full"
-          style={{ backgroundColor: 'var(--background-secondary)' }}
-        >
+        <div className="flex-1 h-2 rounded-full progress-track">
           <div
             className="h-2 transition-all duration-300 rounded-full"
             style={{ 
@@ -175,10 +172,7 @@ function Content({ menuItem }) {
             }}
           />
         </div>
-        <span 
-          className="w-8 text-xs font-medium text-right"
-          style={{ color: 'var(--text-secondary)' }}
-        >
+        <span className="w-8 text-xs font-medium text-right text-secondary">
           {progress}%
         </span>
       </div>
@@ -405,7 +399,7 @@ function Content({ menuItem }) {
                     alert(`Task ${task.id} deleted!`);
                   }
                 }}
-                style={{ color: 'var(--brand-accent)' }}
+                className="delete-text"
               >
                 <Trash2 className="w-4 h-4 mr-2" />
                 Delete
@@ -469,7 +463,7 @@ function Content({ menuItem }) {
           alert(`Task ${task.id} deleted!`);
         }
       },
-      style: { color: 'var(--brand-accent)' },
+      className: "delete-text",
     },
   ];
 
@@ -484,7 +478,7 @@ function Content({ menuItem }) {
             enableSorting={true}
             enablePagination={true}
             actionBarItems={actionBarItems}
-            className="space-y-4"
+            className=""
             title={"Quản lý công ty"}
             subtitle={"Quản lý thông tin các công ty trong hệ thống"}
             icon="building-2"

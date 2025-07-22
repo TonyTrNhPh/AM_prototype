@@ -49,8 +49,8 @@ function HeaderLayout({ currentMenu = null }) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbPage className="text-sm font-bold text-primary">
-                Bảng điều khiển
+              <BreadcrumbPage className="text-sm font-bold text-primary max-w-[200px] truncate">
+                <span className="hidden md:inline">Bảng điều khiển</span>
               </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
@@ -64,8 +64,8 @@ function HeaderLayout({ currentMenu = null }) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbPage className="text-sm font-bold text-primary">
-                {displayMenu.label}
+              <BreadcrumbPage className="text-sm font-bold text-primary max-w-[200px] truncate">
+                <span className="hidden md:inline">{displayMenu.label}</span>
               </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
@@ -79,14 +79,17 @@ function HeaderLayout({ currentMenu = null }) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink className="text-sm font-bold transition-colors text-secondary hover:text-primary">
-                {displayMenu.parent.label}
+              <BreadcrumbLink className="text-sm font-bold transition-colors text-secondary hover:text-primary max-w-[120px] truncate">
+                <span className="hidden md:inline">{displayMenu.parent.label}</span>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            <BreadcrumbSeparator className="hidden md:block" />
             <BreadcrumbItem>
               <BreadcrumbPage className="flex items-center space-x-2">
-                <span className="text-sm font-bold text-primary">{displayMenu.label}</span>
+                <span className="text-sm font-bold text-primary max-w-[120px] truncate">
+                  <span className="hidden md:inline">{displayMenu.label}</span>
+                  <span className="md:hidden">...</span>
+                </span>
               </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
@@ -100,14 +103,15 @@ function HeaderLayout({ currentMenu = null }) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink className="text-sm transition-colors text-secondary hover:text-primary">
-                {displayMenu.label}
+              <BreadcrumbLink className="text-sm transition-colors text-secondary hover:text-primary max-w-[120px] truncate">
+                <span className="hidden md:inline">{displayMenu.label}</span>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
+            <BreadcrumbSeparator className="hidden md:block" />
             <BreadcrumbItem>
-              <BreadcrumbPage className="text-sm font-bold text-primary">
-                {displayMenu.activeChild.label}
+              <BreadcrumbPage className="text-sm font-bold text-primary max-w-[120px] truncate">
+                <span className="hidden md:inline">{displayMenu.activeChild.label}</span>
+                <span className="md:hidden">...</span>
               </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
@@ -120,8 +124,8 @@ function HeaderLayout({ currentMenu = null }) {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbPage className="text-sm font-bold text-primary">
-              {displayMenu.label}
+            <BreadcrumbPage className="text-sm font-bold text-primary max-w-[200px] truncate">
+              <span className="hidden md:inline">{displayMenu.label}</span>
             </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
@@ -130,33 +134,25 @@ function HeaderLayout({ currentMenu = null }) {
   };
 
   return (
-    <header 
-      className="px-6 py-3 transition-colors duration-300 border-b rounded-2xl"
-      style={{ 
-        backgroundColor: 'var(--header-background)',
-        borderColor: 'var(--header-border)',
-        boxShadow: '0px 2px 8px 0px var(--header-shadow)'
-      }}
-    >
+    <header className="px-6 py-3 transition-colors duration-300 border-b rounded-2xl header-bg header-border header-shadow">
       <div className="flex items-center justify-between w-full">
-        <div className="flex items-center">
+        <div className="flex items-center flex-1 min-w-0 mr-4">
           <div className={`transition-all duration-300 ease-in-out ${
             isAnimating ? 'opacity-0 translate-x-2' : 'opacity-100 translate-x-0'
           }`}>
             <IconHolder 
               name={getMenuIcon()} 
               size={24} 
-              className="mr-3"
-              style={{ color: 'var(--text-secondary)' }}
+              className="flex-shrink-0 mr-3 text-secondary"
             />
           </div>
-          <div className={`transition-all duration-300 ease-in-out ${
+          <div className={`transition-all duration-300 ease-in-out min-w-0 flex-1 ${
             isAnimating ? 'opacity-0 translate-x-2' : 'opacity-100 translate-x-0'
           }`}>
             {renderBreadcrumb()}
           </div>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center flex-shrink-0 gap-3 md:gap-6">
           <NotificationBell />
           <LanguageSelector />
           <UserProfileDropdown />
