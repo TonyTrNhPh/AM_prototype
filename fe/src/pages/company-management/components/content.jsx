@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 
 import TableLayout from "@/layouts/TableLayout/TableLayout";
-import ModalBoxLayout from "@/layouts/ModalBoxLayout/ModalBoxLayout";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,22 +20,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 
 function Content({ menuItem }) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
-  const [modalTitle, setModalTitle] = useState("");
-
-  const openModal = (title, content) => {
-    setModalTitle(title);
-    setModalContent(content);
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-    setModalContent(null);
-    setModalTitle("");
-  };
-
   const taskData = [
     { id: "TASK-1001", type: "bug", title: "Fix authentication system vulnerability in user login process", status: "in-progress", priority: "high", estimatedHours: 22, assignee: "John Doe", createdAt: "2025-07-01", dueDate: "2025-07-15", department: "Security", progress: 75 },
     { id: "TASK-1002", type: "enhancement", title: "Implement new dashboard analytics widget for real-time metrics", status: "todo", priority: "medium", estimatedHours: 16, assignee: "Jane Smith", createdAt: "2025-07-02", dueDate: "2025-07-20", department: "Frontend", progress: 0 },
@@ -399,120 +382,19 @@ function Content({ menuItem }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem
-                onClick={() => openModal(
-                  "Task Details", 
-                  <div className="space-y-4">
-                    <div><strong>ID:</strong> {task.id}</div>
-                    <div><strong>Title:</strong> {task.title}</div>
-                    <div><strong>Type:</strong> {task.type}</div>
-                    <div><strong>Status:</strong> {task.status}</div>
-                    <div><strong>Priority:</strong> {task.priority}</div>
-                    <div><strong>Department:</strong> {task.department}</div>
-                    <div><strong>Progress:</strong> {task.progress}%</div>
-                    <div><strong>Estimated Hours:</strong> {task.estimatedHours}</div>
-                    <div><strong>Assignee:</strong> {task.assignee}</div>
-                    <div><strong>Created:</strong> {task.createdAt}</div>
-                    <div><strong>Due Date:</strong> {task.dueDate}</div>
-                  </div>
-                )}
+                onClick={() => {
+                  console.log("View Details for task:", task.id);
+                  alert(`Task Details: ${task.title}`);
+                }}
               >
                 <Eye className="w-4 h-4 mr-2" />
                 View Details
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => openModal(
-                  "Edit Task",
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block mb-1 text-sm font-medium">Title</label>
-                      <input 
-                        type="text" 
-                        defaultValue={task.title}
-                        className="w-full p-2 border rounded-md"
-                      />
-                    </div>
-                    <div>
-                      <label className="block mb-1 text-sm font-medium">Type</label>
-                      <select defaultValue={task.type} className="w-full p-2 border rounded-md">
-                        <option value="bug">Bug</option>
-                        <option value="feature">Feature</option>
-                        <option value="enhancement">Enhancement</option>
-                        <option value="documentation">Documentation</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block mb-1 text-sm font-medium">Priority</label>
-                      <select defaultValue={task.priority} className="w-full p-2 border rounded-md">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block mb-1 text-sm font-medium">Department</label>
-                      <select defaultValue={task.department} className="w-full p-2 border rounded-md">
-                        <option value="Security">Security</option>
-                        <option value="Frontend">Frontend</option>
-                        <option value="Backend">Backend</option>
-                        <option value="Documentation">Documentation</option>
-                        <option value="Design">Design</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="DevOps">DevOps</option>
-                        <option value="QA">QA</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block mb-1 text-sm font-medium">Progress (%)</label>
-                      <input 
-                        type="number" 
-                        min="0"
-                        max="100"
-                        defaultValue={task.progress}
-                        className="w-full p-2 border rounded-md"
-                      />
-                    </div>
-                    <div>
-                      <label className="block mb-1 text-sm font-medium">Estimated Hours</label>
-                      <input 
-                        type="number" 
-                        defaultValue={task.estimatedHours}
-                        className="w-full p-2 border rounded-md"
-                      />
-                    </div>
-                    <div className="flex gap-2 mt-6">
-                      <button 
-                        className="px-4 py-2 text-white transition-colors rounded-md"
-                        style={{ 
-                          backgroundColor: 'var(--brand-accent)',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.target.style.backgroundColor = 'var(--brand-accent-dark)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.backgroundColor = 'var(--brand-accent)';
-                        }}
-                      >
-                        Save Changes
-                      </button>
-                      <button 
-                        onClick={closeModal}
-                        className="px-4 py-2 transition-colors rounded-md"
-                        style={{ 
-                          backgroundColor: 'var(--background-secondary)',
-                          color: 'var(--text-primary)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.target.style.backgroundColor = 'var(--border)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.backgroundColor = 'var(--background-secondary)';
-                        }}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                )}
+                onClick={() => {
+                  console.log("Edit task:", task.id);
+                  alert(`Edit Task: ${task.title}`);
+                }}
               >
                 <Edit className="w-4 h-4 mr-2" />
                 Edit Task
@@ -566,121 +448,16 @@ function Content({ menuItem }) {
       label: "View Details",
       icon: <Eye className="w-4 h-4" />,
       onClick: (task) => {
-        openModal(
-          "Task Details", 
-          <div className="space-y-4">
-            <div><strong>ID:</strong> {task.id}</div>
-            <div><strong>Title:</strong> {task.title}</div>
-            <div><strong>Type:</strong> {task.type}</div>
-            <div><strong>Status:</strong> {task.status}</div>
-            <div><strong>Priority:</strong> {task.priority}</div>
-            <div><strong>Department:</strong> {task.department}</div>
-            <div><strong>Progress:</strong> {task.progress}%</div>
-            <div><strong>Estimated Hours:</strong> {task.estimatedHours}</div>
-            <div><strong>Assignee:</strong> {task.assignee}</div>
-            <div><strong>Created:</strong> {task.createdAt}</div>
-            <div><strong>Due Date:</strong> {task.dueDate}</div>
-          </div>
-        );
+        console.log("View Details for task:", task.id);
+        alert(`Task Details: ${task.title} (${task.type})`);
       },
     },
     {
       label: "Edit Task",
       icon: <Edit className="w-4 h-4" />,
       onClick: (task) => {
-        openModal(
-          "Edit Task",
-          <div className="space-y-4">
-            <div>
-              <label className="block mb-1 text-sm font-medium">Title</label>
-              <input 
-                type="text" 
-                defaultValue={task.title}
-                className="w-full p-2 border rounded-md"
-              />
-            </div>
-            <div>
-              <label className="block mb-1 text-sm font-medium">Type</label>
-              <select defaultValue={task.type} className="w-full p-2 border rounded-md">
-                <option value="bug">Bug</option>
-                <option value="feature">Feature</option>
-                <option value="enhancement">Enhancement</option>
-                <option value="documentation">Documentation</option>
-              </select>
-            </div>
-            <div>
-              <label className="block mb-1 text-sm font-medium">Priority</label>
-              <select defaultValue={task.priority} className="w-full p-2 border rounded-md">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
-            <div>
-              <label className="block mb-1 text-sm font-medium">Department</label>
-              <select defaultValue={task.department} className="w-full p-2 border rounded-md">
-                <option value="Security">Security</option>
-                <option value="Frontend">Frontend</option>
-                <option value="Backend">Backend</option>
-                <option value="Documentation">Documentation</option>
-                <option value="Design">Design</option>
-                <option value="Engineering">Engineering</option>
-                <option value="DevOps">DevOps</option>
-                <option value="QA">QA</option>
-              </select>
-            </div>
-            <div>
-              <label className="block mb-1 text-sm font-medium">Progress (%)</label>
-              <input 
-                type="number" 
-                min="0"
-                max="100"
-                defaultValue={task.progress}
-                className="w-full p-2 border rounded-md"
-              />
-            </div>
-            <div>
-              <label className="block mb-1 text-sm font-medium">Estimated Hours</label>
-              <input 
-                type="number" 
-                defaultValue={task.estimatedHours}
-                className="w-full p-2 border rounded-md"
-              />
-            </div>
-            <div className="flex gap-2 mt-6">
-              <button 
-                className="px-4 py-2 text-white transition-colors rounded-md"
-                style={{ 
-                  backgroundColor: 'var(--brand-accent)',
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = 'var(--brand-accent-dark)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = 'var(--brand-accent)';
-                }}
-              >
-                Save Changes
-              </button>
-              <button 
-                onClick={closeModal}
-                className="px-4 py-2 transition-colors rounded-md"
-                style={{ 
-                  backgroundColor: 'var(--background-secondary)',
-                  color: 'var(--text-primary)'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = 'var(--border)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = 'var(--background-secondary)';
-                }}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        );
+        console.log("Edit task:", task.id);
+        alert(`Edit Task: ${task.title}`);
       },
       separator: false,
     },
@@ -715,13 +492,6 @@ function Content({ menuItem }) {
             rowActions={rowActions}
           />
         </ScrollArea>
-        <ModalBoxLayout
-          isOpen={modalOpen}
-          onClose={closeModal}
-          title={modalTitle}
-        >
-          {modalContent}
-        </ModalBoxLayout>
     </NuqsAdapter>
   );
 }
