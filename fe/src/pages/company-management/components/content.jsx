@@ -1,6 +1,5 @@
 import { NuqsAdapter } from "nuqs/adapters/react";
 import { MoreHorizontal, Trash2, Edit, Eye } from "lucide-react";
-
 import TableLayout from "@/layouts/TableLayout/TableLayout";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { PopupLayout } from "@/layouts/AdaptivePopupLayout";
 import { useState } from "react";
 
 function Content({ menuItem }) {

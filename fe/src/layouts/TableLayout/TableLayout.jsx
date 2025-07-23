@@ -14,6 +14,7 @@ import {
 import { DataTable } from "@/components/data-table/data-table";
 import { Button } from "@/components/ui/button";
 import IconHolder from "@/components/ui/iconholder";
+import { PopupLayout } from "@/layouts/AdaptivePopupLayout";
 
 // Table Layout Components
 import TableTitle from "./components/TableTitle";
@@ -35,6 +36,7 @@ function TableLayout({
   subtitle = "",
   icon = "",
   btnNewText,
+  onNewClick,
   ...props
 }) {
   const [sorting, setSorting] = React.useState([]);
@@ -44,6 +46,7 @@ function TableLayout({
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [advancedFilters, setAdvancedFilters] = React.useState([]);
 
+  
   const table = useReactTable({
     data,
     columns,
@@ -123,18 +126,19 @@ function TableLayout({
         Import
       </Button>
       
-      <Button
-        variant="default"
-        size="sm"
-        onClick={() => {
-          // New functionality
-          alert("New item functionality");
-        }}
-        className="flex items-center gap-2"
+      <PopupLayout
+        trigger={
+          <Button
+            variant="default"
+            size="sm"
+            className="flex items-center gap-2"
+          >
+            <IconHolder name="plus" size="sm" />
+            New {btnNewText}
+          </Button>
+        }
       >
-        <IconHolder name="plus" size="sm" />
-        New {btnNewText}
-      </Button>
+      </PopupLayout>
     </div>
   );
 
