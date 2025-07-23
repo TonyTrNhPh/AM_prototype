@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, cloneElement, isValidElement } from "react";
 
 function PopupLayout({
   trigger,
@@ -53,7 +53,7 @@ function PopupLayout({
       {/* Centered Popup Content */}
       {popoverOpen && (
         <div
-          className={`fixed z-50 bg-background-primary border-main shadow-lg rounded-lg transition-all duration-300 ease-out ${className} ${
+          className={`fixed z-50 transition-all duration-300 ease-out animate-in slide-in-from-bottom-8 fade-in ${
             isAnimating 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-24'
@@ -64,32 +64,22 @@ function PopupLayout({
             transform: "translate(-50%, -50%)",
           }}
         >
-          <style>{`
-            .popup-enter {
-              animation: slideInFromBottom 0.3s ease-out forwards;
-            }
-            
-            @keyframes slideInFromBottom {
-              0% {
-                transform: translate(-50%, -50%) translateY(100px);
-                opacity: 0;
-              }
-              100% {
-                transform: translate(-50%, -50%) translateY(0);
-                opacity: 1;
-              }
-            }
-          `}</style>
-          {children || (
-            <div className="p-4">
-              <h3 className="mb-2 text-lg font-semibold text-primary">
-                Popup Content
-              </h3>
-              <p className="text-secondary">
-                This is a blank popup layout. Add your content here.
-              </p>
-            </div>
-          )}
+          {isValidElement(children) 
+            ? cloneElement(children, { 
+                onCancel: handleClose,
+                ...children.props 
+              })
+            : children || (
+                <div className="p-4 rounded-lg shadow-lg bg-background-primary border-main">
+                  <h3 className="mb-2 text-lg font-semibold text-primary">
+                    Popup Content
+                  </h3>
+                  <p className="text-secondary">
+                    This is a blank popup layout. Add your content here.
+                  </p>
+                </div>
+              )
+          }
         </div>
       )}
     </>

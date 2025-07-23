@@ -15,6 +15,7 @@ import { DataTable } from "@/components/data-table/data-table";
 import { Button } from "@/components/ui/button";
 import IconHolder from "@/components/ui/iconholder";
 import { PopupLayout } from "@/layouts/AdaptivePopupLayout";
+import AdaptiveLayout from "@/layouts/AdaptivePopupLayout/components/AdaptiveLayout";
 
 // Table Layout Components
 import TableTitle from "./components/TableTitle";
@@ -45,6 +46,24 @@ function TableLayout({
   const [rowSelection, setRowSelection] = React.useState({});
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [advancedFilters, setAdvancedFilters] = React.useState([]);
+
+  // Handle form save
+  const handleFormSave = (formData) => {
+    console.log('New item data:', formData);
+    // Here you would typically:
+    // 1. Validate the data
+    // 2. Call an API to save the data
+    // 3. Update the table data
+    // 4. Show success message
+    // For now, just alert the data
+    alert(`New ${btnNewText} created with data: ${JSON.stringify(formData, null, 2)}`);
+  };
+
+  // Handle form cancel
+  const handleFormCancel = () => {
+    console.log('Form cancelled');
+    // Any cleanup logic can go here
+  };
 
   
   const table = useReactTable({
@@ -138,6 +157,12 @@ function TableLayout({
           </Button>
         }
       >
+        <AdaptiveLayout
+          title={`Add New ${btnNewText || 'Item'}`}
+          columns={columns}
+          onSave={handleFormSave}
+          onCancel={handleFormCancel}
+        />
       </PopupLayout>
     </div>
   );
