@@ -1,6 +1,18 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 import IconHolder from "@/components/ui/iconholder";
 import TextInput from "./TextInput";
 import NumberInput from "./NumberInput";
@@ -140,6 +152,12 @@ function AdaptiveLayout({
   const handleSave = () => {
     if (onSave) {
       onSave(formData);
+      // Show success toast notification
+      toast.success("Data saved successfully!", {
+        description: "Your changes have been saved.",
+        duration: 3000,
+        position: "top-center",
+      });
     }
   };
 
@@ -184,9 +202,28 @@ function AdaptiveLayout({
         <Button variant="outline" onClick={handleCancel}>
           Cancel
         </Button>
-        <Button variant="default" onClick={handleSave}>
-          Save
-        </Button>
+        
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="default">
+              Save
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Confirm Save</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to save these changes? This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleSave}>
+                Save Changes
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );

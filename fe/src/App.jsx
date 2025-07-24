@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import SidebarContainer from "./layouts/SidebarLayout/SidebarLayout";
 import HeaderContainer from "./layouts/HeaderLayout/HeaderLayout";
 import LoaderLayout from "./layouts/LoaderLayout/LoaderLayout";
+import { Toaster } from "@/components/ui/sonner";
 import { getPageComponent } from "./utils/pageRouter";
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
           </main>
         </div>
       </div>
+      
+      {/* Toast notifications */}
+      <Toaster position="top-center" />
     </>
   );
 }

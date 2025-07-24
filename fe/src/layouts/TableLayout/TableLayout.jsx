@@ -56,10 +56,8 @@ function TableLayout({
     // 3. Update the table data
     // 4. Show success message
     // For now, just alert the data
-    alert(`New ${btnNewText} created with data: ${JSON.stringify(formData, null, 2)}`);
+    //alert(`New ${btnNewText} created with data: ${JSON.stringify(formData, null, 2)}`);
   };
-
-  // Handle form cancel
   const handleFormCancel = () => {
     console.log('Form cancelled');
     // Any cleanup logic can go here
