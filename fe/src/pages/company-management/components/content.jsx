@@ -923,6 +923,8 @@ function Content({ menuItem }) {
       meta: {
         label: "Task ID",
         variant: "text",
+        inputVariant: "compulsory",
+         enableSearch: true,  
       },
       cell: ({ row }) => (
         <div className="font-mono text-sm">{row.getValue("id")}</div>
@@ -934,6 +936,7 @@ function Content({ menuItem }) {
       meta: {
         label: "Type",
         variant: "select",
+        inputVariant: "compulsory",
         options: [
           { label: "Bug", value: "bug" },
           { label: "Enhancement", value: "enhancement" },
@@ -952,6 +955,7 @@ function Content({ menuItem }) {
       meta: {
         label: "Title",
         variant: "text",
+        inputVariant: "compulsory",
       },
       cell: ({ row }) => (
         <div className="max-w-md truncate">{row.getValue("title")}</div>
@@ -963,6 +967,7 @@ function Content({ menuItem }) {
       meta: {
         label: "Status",
         variant: "select",
+        inputVariant: "compulsory",
         options: [
           { label: "To Do", value: "todo" },
           { label: "In Progress", value: "in-progress" },
@@ -980,6 +985,7 @@ function Content({ menuItem }) {
       meta: {
         label: "Priority",
         variant: "select",
+        inputVariant: "compulsory",
         options: [
           { label: "Low", value: "low" },
           { label: "Medium", value: "medium" },
@@ -1009,6 +1015,7 @@ function Content({ menuItem }) {
       meta: {
         label: "Assignee",
         variant: "text",
+        inputVariant: "compulsory",
       },
       cell: ({ row }) => (
         <div className="font-medium">{row.getValue("assignee")}</div>
@@ -1033,6 +1040,7 @@ function Content({ menuItem }) {
       meta: {
         label: "Due Date",
         variant: "date",
+        inputVariant: "compulsory",
       },
       cell: ({ row }) => (
         <div className="text-sm">

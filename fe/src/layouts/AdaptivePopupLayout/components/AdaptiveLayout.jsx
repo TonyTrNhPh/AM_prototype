@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Switch } from "@/components/ui/switch";
-import { Calendar } from "@/components/ui/calendar";
 import IconHolder from "@/components/ui/iconholder";
+import TextInput from "./TextInput";
+import NumberInput from "./NumberInput";
+import SelectInput from "./SelectInput";
+import DateInput from "./DateInput";
+import TextareaInput from "./TextareaInput";
+import BooleanInput from "./BooleanInput";
 
 function AdaptiveLayout({ 
   title = "Form",
@@ -16,7 +16,7 @@ function AdaptiveLayout({
   onSave,
   onCancel,
   className = "",
-  maxWidth = "400px",
+  minWidth = "40vw",
   maxHeight = "80vh"
 }) {
   const [formData, setFormData] = useState(initialData);
@@ -40,131 +40,69 @@ function AdaptiveLayout({
   // Generate input component based on column meta
   const renderInput = (column) => {
     const { accessorKey, meta = {}, header } = column;
-    const { variant, options, unit } = meta;
+    const { variant, options, unit, inputVariant = "optional", enableSearch = false, searchOptions = [] } = meta;
     const value = formData[accessorKey] || '';
 
     const label = meta.label || header || accessorKey;
 
+    // Common props for all inputs
+    const commonProps = {
+      accessorKey,
+      label,
+      value,
+      onChange: handleInputChange,
+      variant: inputVariant // "optional" or "compulsory"
+    };
+
     switch (variant) {
       case 'text':
-        return (
-          <div key={accessorKey} className="space-y-2">
-            <Label htmlFor={accessorKey} className="text-sm font-medium text-primary">
-              {label}
-            </Label>
-            <Input
-              id={accessorKey}
-              value={value}
-              onChange={(e) => handleInputChange(accessorKey, e.target.value)}
-              placeholder={`Enter ${label.toLowerCase()}`}
-              className="w-full"
-            />
-          </div>
-        );
+        return <TextInput 
+          key={accessorKey}
+          {...commonProps} 
+          enableSearch={enableSearch}
+          searchOptions={searchOptions}
+        />;
 
       case 'select':
-        return (
-          <div key={accessorKey} className="space-y-2">
-            <Label htmlFor={accessorKey} className="text-sm font-medium text-primary">
-              {label}
-            </Label>
-            <Select value={value} onValueChange={(val) => handleInputChange(accessorKey, val)}>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={`Select ${label.toLowerCase()}`} />
-              </SelectTrigger>
-              <SelectContent>
-                {options?.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        );
+        return <SelectInput 
+          key={accessorKey}
+          {...commonProps} 
+          options={options} 
+        />;
 
       case 'number':
-        return (
-          <div key={accessorKey} className="space-y-2">
-            <Label htmlFor={accessorKey} className="text-sm font-medium text-primary">
-              {label} {unit && <span className="text-xs text-secondary">({unit})</span>}
-            </Label>
-            <Input
-              id={accessorKey}
-              type="number"
-              value={value}
-              onChange={(e) => handleInputChange(accessorKey, e.target.value)}
-              placeholder={`Enter ${label.toLowerCase()}`}
-              className="w-full"
-            />
-          </div>
-        );
+        return <NumberInput 
+          key={accessorKey}
+          {...commonProps} 
+          unit={unit} 
+        />;
 
       case 'date':
-        return (
-          <div key={accessorKey} className="space-y-2">
-            <Label htmlFor={accessorKey} className="text-sm font-medium text-primary">
-              {label}
-            </Label>
-            <Input
-              id={accessorKey}
-              type="date"
-              value={value}
-              onChange={(e) => handleInputChange(accessorKey, e.target.value)}
-              className="w-full"
-            />
-          </div>
-        );
+        return <DateInput 
+          key={accessorKey}
+          {...commonProps} 
+        />;
 
       case 'textarea':
-        return (
-          <div key={accessorKey} className="space-y-2">
-            <Label htmlFor={accessorKey} className="text-sm font-medium text-primary">
-              {label}
-            </Label>
-            <Textarea
-              id={accessorKey}
-              value={value}
-              onChange={(e) => handleInputChange(accessorKey, e.target.value)}
-              placeholder={`Enter ${label.toLowerCase()}`}
-              className="w-full min-h-[80px]"
-              rows={3}
-            />
-          </div>
-        );
+        return <TextareaInput 
+          key={accessorKey}
+          {...commonProps} 
+        />;
 
       case 'boolean':
-        return (
-          <div key={accessorKey} className="space-y-2">
-            <div className="flex items-center space-x-2">
-              <Switch
-                id={accessorKey}
-                checked={value === true || value === 'true'}
-                onCheckedChange={(checked) => handleInputChange(accessorKey, checked)}
-              />
-              <Label htmlFor={accessorKey} className="text-sm font-medium text-primary">
-                {label}
-              </Label>
-            </div>
-          </div>
-        );
+        return <BooleanInput 
+          key={accessorKey}
+          {...commonProps} 
+        />;
 
       default:
         // Default to text input for unknown variants
-        return (
-          <div key={accessorKey} className="space-y-2">
-            <Label htmlFor={accessorKey} className="text-sm font-medium text-primary">
-              {label}
-            </Label>
-            <Input
-              id={accessorKey}
-              value={value}
-              onChange={(e) => handleInputChange(accessorKey, e.target.value)}
-              placeholder={`Enter ${label.toLowerCase()}`}
-              className="w-full"
-            />
-          </div>
-        );
+        return <TextInput 
+          key={accessorKey}
+          {...commonProps} 
+          enableSearch={enableSearch}
+          searchOptions={searchOptions}
+        />;
     }
   };
 
@@ -193,7 +131,7 @@ function AdaptiveLayout({
     <div 
       className={`bg-background-primary border-main rounded-lg shadow-lg overflow-hidden ${className}`}
       style={{ 
-        maxWidth,
+        minWidth,
         maxHeight,
         width: '100%',
         height: calculateHeight()
@@ -208,7 +146,7 @@ function AdaptiveLayout({
           onClick={handleCancel}
           className="w-6 h-6 p-0 hover:bg-accent"
         >
-          <IconHolder name="x" size="sm" />
+          <IconHolder name="x" size={16} />
         </Button>
       </div>
 

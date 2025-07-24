@@ -158,7 +158,7 @@ function TableLayout({
         }
       >
         <AdaptiveLayout
-          title={`Add New ${btnNewText || 'Item'}`}
+          title={`Add new ${btnNewText || 'Item'}`}
           columns={columns}
           onSave={handleFormSave}
           onCancel={handleFormCancel}
