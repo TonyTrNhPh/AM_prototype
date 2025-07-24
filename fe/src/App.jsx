@@ -19,6 +19,9 @@ function App() {
 
   return (
     <>
+      {isLoading && (
+        <LoaderLayout onComplete={handleLoaderComplete} duration={LOADER_DURATION} />
+      )}
       <div className="flex h-screen gap-6 p-6 app-background">
         {/* Sidebar: fixed width */}
         <div className="shrink-0 basis-[220px]">
