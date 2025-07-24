@@ -210,6 +210,66 @@ All input components support two field variants:
   }
 }
 ```
+#### 7. Radio Button Group  (`variant: 'radio'`)
+```javascript
+{
+  accessorKey: "preference",
+  header: "User Preference",
+  meta: {
+    variant: "radio",
+    inputVariant: "compulsory",
+    direction: "vertical", // or "horizontal"
+    options: [
+      {
+        value: "email",
+        label: "Email Notifications",
+        description: "Receive updates via email"
+      },
+      {
+        value: "sms",
+        label: "SMS Notifications", 
+        description: "Receive updates via text message"
+      },
+      {
+        value: "none",
+        label: "No Notifications",
+        description: "Don't receive any notifications"
+      }
+    ]
+  }
+}
+```
+
+#### 7. Multiple Checkbox Group  (`variant: 'checkbox'`)
+```javascript
+{
+  accessorKey: "interests",
+  header: "Areas of Interest",
+  meta: {
+    variant: "checkboxGroup",
+    inputVariant: "optional",
+    direction: "vertical",
+    maxSelections: 3, // Optional limit
+    options: [
+      {
+        value: "tech",
+        label: "Technology",
+        description: "Latest tech trends and updates"
+      },
+      {
+        value: "sports",
+        label: "Sports",
+        description: "Sports news and events"
+      },
+      {
+        value: "music",
+        label: "Music",
+        description: "Music releases and concerts"
+      }
+    ]
+  }
+}
+```
 
 ## 🎛️ Props
 

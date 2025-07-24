@@ -8,6 +8,8 @@ import SelectInput from "./SelectInput";
 import DateInput from "./DateInput";
 import TextareaInput from "./TextareaInput";
 import BooleanInput from "./BooleanInput";
+import RadioButtonGroupInput from "./RadioButtonGroupInput";
+import MultipleCheckboxGroupInput from "./MultipleCheckboxGroupInput";
 
 function AdaptiveLayout({ 
   title = "Form",
@@ -93,6 +95,26 @@ function AdaptiveLayout({
         return <BooleanInput 
           key={accessorKey}
           {...commonProps} 
+        />;
+
+      case 'radio':
+      case 'radioGroup':
+        return <RadioButtonGroupInput 
+          key={accessorKey}
+          {...commonProps} 
+          options={options}
+          direction={meta.direction || "vertical"}
+        />;
+
+      case 'checkbox':
+      case 'checkboxGroup':
+      case 'multipleCheckbox':
+        return <MultipleCheckboxGroupInput 
+          key={accessorKey}
+          {...commonProps} 
+          options={options}
+          direction={meta.direction || "vertical"}
+          maxSelections={meta.maxSelections}
         />;
 
       default:
